@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Areas\Student\Cotrollers\" />
     <Folder Include="Areas\Student\Views\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>
