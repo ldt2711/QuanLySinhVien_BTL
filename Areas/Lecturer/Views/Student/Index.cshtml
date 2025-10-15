@@ -1,0 +1,44 @@
+﻿@model IEnumerable<QuanLySinhVien_BTL.Models.Student>
+
+@{
+    ViewData["Title"] = "Danh sách sinh viên";
+    Layout = "~/Areas/Lecturer/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Danh sách sinh viên</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Student", new { area = "Lecturer" })" class="btn btn-primary">Thêm sinh viên</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>MSSV</th>
+            <th>Họ tên</th>
+            <th>Giới tính</th>
+            <th>Ngày sinh</th>
+            <th>Địa chỉ</th>
+            <th>Tuổi</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Ngành</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.Name</td>
+                <td>@student.Gender</td>
+                <td>@student.DateOfBirth.ToShortDateString()</td>
+                <td>@student.Address</td>
+                <td>@student.Age</td>
+                <td>@student.Email</td>
+                <td>@student.phoneNumber</td>
+                <td>@student.major?.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
