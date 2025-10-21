@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLySinhVien_BTL.Data;
 
@@ -11,9 +12,11 @@ using QuanLySinhVien_BTL.Data;
 namespace QuanLySinhVien_BTL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251021180413_UpdateLecturerWithDepartment")]
+    partial class UpdateLecturerWithDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,32 +43,6 @@ namespace QuanLySinhVien_BTL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Department");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfEstablishment = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Công nghệ thông tin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOfEstablishment = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Kinh tế"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateOfEstablishment = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Ngoại ngữ"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateOfEstablishment = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Khoa học máy tính"
-                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien_BTL.Models.Lecturer", b =>

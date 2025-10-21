@@ -12,6 +12,7 @@ namespace QuanLySinhVien_BTL.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Major> Majors { get; set; }
+        public DbSet<Lecturer> Lecturers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,6 +31,13 @@ namespace QuanLySinhVien_BTL.Data
                 new Major { Id = 2, Name = "Kinh tế", Detail = "Tài chính, quản trị", TotalCredits = 130 },
                 new Major { Id = 3, Name = "Khoa học máy tính", Detail = "Thuật toán", TotalCredits = 125 },
                 new Major { Id = 4, Name = "Ngôn ngữ Anh", Detail = "Tiếng Anh và văn hóa", TotalCredits = 115 }
+            );
+
+            modelBuilder.Entity<Department>().HasData(
+                new Department { Id = 1, Name = "Công nghệ thông tin" },
+                new Department { Id = 2, Name = "Kinh tế"},
+                new Department { Id = 3, Name = "Ngoại ngữ"},
+                new Department { Id = 4, Name = "Khoa học máy tính"}
             );
         }
     }

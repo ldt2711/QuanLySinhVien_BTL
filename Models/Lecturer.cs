@@ -1,4 +1,6 @@
-﻿namespace QuanLySinhVien_BTL.Models
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
+namespace QuanLySinhVien_BTL.Models
 {
     public class Lecturer
     {
@@ -7,7 +9,9 @@
         public Gender Gender { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public Major Major { get; set; }
+        public int DepartmentId { get; set; }
+        [ValidateNever]
+        public Department Department { get; set; }
 
     }
 }
