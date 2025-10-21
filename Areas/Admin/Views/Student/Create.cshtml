@@ -1,0 +1,84 @@
+﻿@model QuanLySinhVien_BTL.Models.Student;
+
+@{
+    ViewData["Title"] = "Thêm sinh viên";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h3 class="mb-0">Thêm sinh viên mới</h3>
+        </div>
+        <div class="card-body p-4">
+            <form asp-area="Admin" asp-controller="Student" asp-action="Create" method="post">
+
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-bold">Họ và tên</label>
+                    <input asp-for="Name" class="form-control" placeholder="Nhập họ tên sinh viên" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Gender" class="form-label fw-bold">Giới tính</label>
+                    <select asp-for="Gender" class="form-select">
+                        <option value="">-- Chọn giới tính --</option>
+                        <option value="Male">Nam</option>
+                        <option value="Female">Nữ</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DateOfBirth" class="form-label fw-bold">Ngày sinh</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MajorId" class="form-label fw-bold">Ngành học</label>
+                    <select asp-for="MajorId" asp-items="ViewBag.Majors" class="form-select">
+                        <option value="">-- Chọn ngành học --</option>
+                    </select>
+                    <span asp-validation-for="MajorId" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label fw-bold">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="example@student.edu.vn" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Address" class="form-label fw-bold">Địa chỉ</label>
+                    <input asp-for="Address" class="form-control" placeholder="Nhập địa chỉ sinh viên" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="phoneNumber" class="form-label fw-bold">Số điện thoại</label>
+                    <input asp-for="phoneNumber" type="tel" class="form-control" placeholder="Nhập số điện thoại" />
+                    <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success px-4 me-2">
+                        <i class="bi bi-save"></i> Lưu sinh viên
+                    </button>
+                    <a asp-area="Admin" asp-controller="Student" asp-action="Index" class="btn btn-secondary px-4">
+                        <i class="bi bi-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

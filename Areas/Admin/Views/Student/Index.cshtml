@@ -2,13 +2,13 @@
 
 @{
     ViewData["Title"] = "Danh sách sinh viên";
-    Layout = "~/Areas/Lecturer/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="mb-4">Danh sách sinh viên</h2>
 
 <p>
-    <a href="@Url.Action("Create", "Student", new { area = "Lecturer" })" class="btn btn-primary">Thêm sinh viên</a>
+    <a href="@Url.Action("Create", "Student", new { area = "Admin" })" class="btn btn-primary">Thêm sinh viên</a>
 </p>
 
 <table class="table table-bordered table-striped">
@@ -19,7 +19,6 @@
             <th>Giới tính</th>
             <th>Ngày sinh</th>
             <th>Địa chỉ</th>
-            <th>Tuổi</th>
             <th>Email</th>
             <th>Số điện thoại</th>
             <th>Ngành</th>
@@ -34,10 +33,9 @@
                 <td>@student.Gender</td>
                 <td>@student.DateOfBirth.ToShortDateString()</td>
                 <td>@student.Address</td>
-                <td>@student.Age</td>
                 <td>@student.Email</td>
                 <td>@student.phoneNumber</td>
-                <td>@student.major?.Name</td>
+                <td>@(student.Major?.Name)</td>
             </tr>
         }
     </tbody>

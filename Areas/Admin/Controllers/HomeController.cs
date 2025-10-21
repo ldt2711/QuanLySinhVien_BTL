@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace QuanLySinhVien_BTL.Area.Lecturer.Controllers
+namespace QuanLySinhVien_BTL.Area.Admin.Controllers
 {
-    [Area("Lecturer")]
+    [Area("Admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()

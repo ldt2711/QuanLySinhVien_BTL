@@ -29,9 +29,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-// tu dong vao lecturer
+// tu dong vao admin
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}",
-    defaults: new { area = "Lecturer" });
+    defaults: new { area = "Admin" });
 app.Run();

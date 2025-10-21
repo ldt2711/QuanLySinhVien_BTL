@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace QuanLySinhVien_BTL.Areas.Lecturer.Controllers
+namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 {
     public class FAQ : Controller
     {

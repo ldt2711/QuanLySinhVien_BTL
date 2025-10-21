@@ -22,63 +22,6 @@ namespace QuanLySinhVien_BTL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("QuanLySinhVien_BTL.Models.Course", b =>
-                {
-                    b.Property<int>("CourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
-
-                    b.Property<string>("CourseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CourseId");
-
-                    b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("QuanLySinhVien_BTL.Models.Lecturer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MajorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MajorId");
-
-                    b.ToTable("Lecturers");
-                });
-
             modelBuilder.Entity("QuanLySinhVien_BTL.Models.Major", b =>
                 {
                     b.Property<int>("Id")
@@ -100,7 +43,37 @@ namespace QuanLySinhVien_BTL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Major");
+                    b.ToTable("Majors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Detail = "Phần mềm, mạng",
+                            Name = "Công nghệ thông tin",
+                            TotalCredits = 120
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Detail = "Tài chính, quản trị",
+                            Name = "Kinh tế",
+                            TotalCredits = 130
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Detail = "Thuật toán",
+                            Name = "Khoa học máy tính",
+                            TotalCredits = 125
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Detail = "Tiếng Anh và văn hóa",
+                            Name = "Ngôn ngữ Anh",
+                            TotalCredits = 115
+                        });
                 });
 
             modelBuilder.Entity("QuanLySinhVien_BTL.Models.Student", b =>
@@ -128,27 +101,28 @@ namespace QuanLySinhVien_BTL.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<int>("MajorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("majorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("phoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("phoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("majorId");
+                    b.HasIndex("MajorId");
 
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("QuanLySinhVien_BTL.Models.Lecturer", b =>
+            modelBuilder.Entity("QuanLySinhVien_BTL.Models.Student", b =>
                 {
                     b.HasOne("QuanLySinhVien_BTL.Models.Major", "Major")
-                        .WithMany()
+                        .WithMany("Students")
                         .HasForeignKey("MajorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -156,15 +130,9 @@ namespace QuanLySinhVien_BTL.Migrations
                     b.Navigation("Major");
                 });
 
-            modelBuilder.Entity("QuanLySinhVien_BTL.Models.Student", b =>
+            modelBuilder.Entity("QuanLySinhVien_BTL.Models.Major", b =>
                 {
-                    b.HasOne("QuanLySinhVien_BTL.Models.Major", "major")
-                        .WithMany()
-                        .HasForeignKey("majorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("major");
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

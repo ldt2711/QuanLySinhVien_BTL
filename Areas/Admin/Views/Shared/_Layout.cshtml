@@ -7,14 +7,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Khu vực giảng viên</title>
+    <title>@ViewData["Title"] - Khu vực quản trị viên</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="Lecturer" asp-controller="Home" asp-action="Index">Giảng viên</a>
+                <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">Quản trị viên</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
@@ -23,16 +23,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Lecturer" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Lecturer" asp-controller="Course" asp-action="Index">Khoá học</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Course" asp-action="Index">Khoá học</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Lecturer" asp-controller="Student" asp-action="Index">Sinh viên</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Student" asp-action="Index">Sinh viên</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Lecturer" asp-controller="Account" asp-action="Logout">Đăng xuất</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Account" asp-action="Logout">Đăng xuất</a>
                         </li>
                     </ul>
                 </div>
@@ -47,5 +47,6 @@
     <footer class="border-top text-center text-muted mt-4 py-3">
         &copy; 2025 - Hệ thống quản lý giảng viên
     </footer>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
