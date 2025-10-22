@@ -16,13 +16,45 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchString, int? majorId)
         {
+            ViewData["CurrentFilter"] = searchString; // Giữ lại giá trị tìm kiếm
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", majorId);
+
             var students = _context.Students
                 .Include(s => s.Major)
-                .ToList();
-            return View(students);
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // Thử chuyển searchString sang số để tìm kiếm theo Id
+                if (int.TryParse(searchString, out int studentId))
+                {
+                    students = students.Where(s => s.Id == studentId || s.Name.Contains(searchString));
+                }
+                else
+                {
+                    // Nếu không phải số, tìm kiếm theo tên
+                    students = students.Where(s => s.Name.Contains(searchString));
+                }
+            }
+
+            // Lọc theo chuyên ngành
+            if (majorId.HasValue && majorId.Value > 0)
+            {
+                students = students.Where(s => s.MajorId == majorId.Value);
+            }
+
+            return View(students.ToList());
         }
+
+        //public IActionResult Index()
+        //{
+        //    var students = _context.Students
+        //        .Include(s => s.Major)
+        //        .ToList();
+        //    return View(students);
+        //}
 
         [HttpGet]
         public IActionResult Create()

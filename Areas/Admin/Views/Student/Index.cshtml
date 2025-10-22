@@ -5,11 +5,28 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+
 <h2 class="mb-4">Danh sách sinh viên</h2>
 
 <p>
     <a href="@Url.Action("Create", "Student", new { area = "Admin" })" class="btn btn-primary">Thêm sinh viên</a>
 </p>
+
+<div class="mb-3">
+    <form asp-action="Index" asp-controller="Student" asp-area="Admin" method="get" class="d-flex align-items-center">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm kiếm theo tên hoặc MSSV..." value="@ViewData["CurrentFilter"]" />
+
+        <select name="majorId" class="form-select me-2">
+            <option value="">-- Lọc theo Ngành --</option>
+            @foreach (var majorItem in ViewBag.Majors as SelectList)
+            {
+                <option value="@majorItem.Value" selected="@(majorItem.Value == ViewData["CurrentMajorId"]?.ToString())">@majorItem.Text</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-info">Tìm kiếm & Lọc</button>
+    </form>
+</div>
+
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -22,6 +39,7 @@
             <th>Email</th>
             <th>Số điện thoại</th>
             <th>Ngành</th>
+            <th>Tác vụ</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +54,10 @@
                 <td>@student.Email</td>
                 <td>@student.phoneNumber</td>
                 <td>@(student.Major?.Name)</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Student", new { area = "Admin", id = student.Id })" class="btn btn-sm btn-warning">Sửa</a>
+                    <a href="@Url.Action("Delete", "Student", new { area = "Admin", id = student.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">Xóa</a>
+                </td>
             </tr>
         }
     </tbody>

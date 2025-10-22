@@ -13,7 +13,7 @@ namespace QuanLySinhVien_BTL.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Major> Majors { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
-
+        public DbSet<Department> Departments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
