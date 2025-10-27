@@ -4,7 +4,7 @@ namespace QuanLySinhVien_BTL.Models
 {
     public class Department
     {
-        public int Id { get; set; }
+        public string DeparmentCode { get; set; }
         public string Name { get; set; }
         public DateTime DateOfEstablishment { get; set; }
 

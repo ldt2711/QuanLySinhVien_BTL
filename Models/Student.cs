@@ -20,7 +20,7 @@ namespace QuanLySinhVien_BTL.Models
 
         [Required(ErrorMessage = "Trường Ngành học là bắt buộc.")]
         [Display(Name = "Ngành học")]
-        public int MajorId { get; set; }
+        public string MajorCode { get; set; }
 
         // 🔹 Thuộc tính điều hướng (navigation property)
         [ValidateNever]
