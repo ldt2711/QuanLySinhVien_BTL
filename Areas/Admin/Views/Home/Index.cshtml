@@ -1,36 +1,12 @@
 ﻿@{
+    ViewData["Title"] = "Trang chủ Admin";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Trang chủ quản trị viên";
 }
 
-<style>
-    /* Căn giữa toàn bộ khối nội dung */
-    .center-container {
-        min-height: 80vh; /* Chiếm 80% chiều cao màn hình */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+<h1>Chào mừng quản trị viên đến với hệ thống!</h1>
+<p>Hãy chọn một chức năng bên dưới để bắt đầu:</p>
 
-    /* Làm 2 nút đều kích thước */
-    .btn-custom {
-        width: 220px;
-        font-size: 18px;
-        padding: 12px 0;
-    }
-</style>
-
-<div class="center-container">
-    <div class="text-center">
-        <h1 class="display-5 mb-4">Chào mừng quản trị viên đến với hệ thống!</h1>
-
-        <p>Hãy chọn một chức năng bên dưới để bắt đầu:</p>
-
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <a class="btn btn-primary btn-lg btn-custom" asp-area="Admin" asp-controller="Lecturer" asp-action="Index">Quản lý giảng viên</a>
-            <a class="btn btn-success btn-lg btn" asp-area="Admin" asp-controller="Student" asp-action="Index">Quản lý sinh viên</a>
-        </div>
-    </div>
+<div class="d-flex gap-2">
+    <a asp-area="Admin" asp-controller="Lecturer" asp-action="Index" class="btn btn-primary">Quản lý giảng viên</a>
+    <a asp-area="Admin" asp-controller="Student" asp-action="Index" class="btn btn-success">Quản lý sinh viên</a>
 </div>
