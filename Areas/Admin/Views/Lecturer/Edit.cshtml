@@ -43,11 +43,11 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="DepartmentId" class="form-label"></label> @* Sẽ hiển thị "DepartmentId" *@
-                <select asp-for="DepartmentId" class="form-select" asp-items="@(ViewBag.Departments as SelectList)">
+                <label asp-for="DepartmentCode" class="form-label"></label> @* Sẽ hiển thị "DepartmentId" *@
+                <select asp-for="DepartmentCode" class="form-select" asp-items="@(ViewBag.Departments as SelectList)">
                     <option value="">-- Chọn Khoa --</option>
                 </select>
-                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                <span asp-validation-for="DepartmentCode" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu thay đổi</button>

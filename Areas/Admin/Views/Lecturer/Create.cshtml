@@ -46,11 +46,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="DepartmentId" class="form-label fw-bold">Khoa</label>
-                    <select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select">
+                    <label asp-for="DepartmentCode" class="form-label fw-bold">Khoa</label>
+                    <select asp-for="DepartmentCode" asp-items="ViewBag.Departments" class="form-select">
                         <option value="">-- Chọn khoa --</option>
                     </select>
-                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    <span asp-validation-for="DepartmentCode" class="text-danger"></span>
                 </div>
 
                 <div class="text-center mt-4">

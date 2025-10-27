@@ -16,10 +16,10 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string searchString, int? majorId)
+        public IActionResult Index(string searchString, string MajorCode)
         {
             ViewData["CurrentFilter"] = searchString; // Giữ lại giá trị tìm kiếm
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", majorId);
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", MajorCode);
 
             var students = _context.Students
                 .Include(s => s.Major)
@@ -40,9 +40,9 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             }
 
             // Lọc theo chuyên ngành
-            if (majorId.HasValue && majorId.Value > 0)
+            if (!string.IsNullOrEmpty(MajorCode))
             {
-                students = students.Where(s => s.MajorId == majorId.Value);
+                students = students.Where(s => s.MajorCode == MajorCode);
             }
 
             return View(students.ToList());
@@ -67,10 +67,10 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Student model)
         {
-            Console.WriteLine($"➡ MajorId nhận được: {model.MajorId}");
+            Console.WriteLine($"➡ MajorId nhận được: {model.MajorCode}");
             if (!ModelState.IsValid)
             {
-                ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", model.MajorId);
+                ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", model.MajorCode);
                 return View(model);
             }
 
@@ -108,7 +108,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             }
 
             // Điền DropDownList cho chuyên ngành
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", student.MajorId);
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", student.MajorCode);
             return View(student);
         }
 
@@ -142,7 +142,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             // Nếu ModelState không hợp lệ, load lại View với dữ liệu đã nhập
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", student.MajorId);
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", student.MajorCode);
             return View(student);
         }
 

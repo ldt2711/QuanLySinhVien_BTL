@@ -17,13 +17,12 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchString, int? departmentId)
+        public async Task<IActionResult> Index(string searchString, string DepartmentCode)
         {
             ViewData["CurrentFilter"] = searchString;
-            ViewData["CurrentDepartmentId"] = departmentId; 
+            ViewData["CurrentDepartmentId"] = DepartmentCode;
 
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", departmentId);
-
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", DepartmentCode);
             var lecturers = _context.Lecturers
                                     .Include(l => l.Department) 
                                     .AsQueryable();
@@ -41,10 +40,10 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             }
 
             // Lọc theo Khoa
-            if (departmentId.HasValue && departmentId.Value > 0)
+            if (!string.IsNullOrEmpty(DepartmentCode))
             {
-                lecturers = lecturers.Where(l => l.DepartmentId == departmentId.Value);
-            }
+                lecturers = lecturers.Where(l => l.DepartmentCode == DepartmentCode);
+            }  
 
             return View(await lecturers.ToListAsync());
         }
@@ -68,10 +67,10 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Lecturer model)
         {
-            Console.WriteLine($"➡ DepartmentId nhận được: {model.DepartmentId}");
+            Console.WriteLine($"➡ DepartmentCode nhận được: {model.DepartmentCode}");
             if (!ModelState.IsValid)
             {
-                ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", model.DepartmentId);
+                ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", model.DepartmentCode);
                 return View(model);
             }
             _context.Lecturers.Add(model);
@@ -104,7 +103,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", lecturer.DepartmentId);
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", lecturer.DepartmentCode);
             return View(lecturer);
         }
 
@@ -138,7 +137,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", lecturer.DepartmentId);
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "Id", "Name", lecturer.DepartmentCode);
             return View(lecturer);
         }
 
