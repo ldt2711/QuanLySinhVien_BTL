@@ -34,10 +34,10 @@ namespace QuanLySinhVien_BTL.Data
             );
 
             modelBuilder.Entity<Department>().HasData(
-                new Department { DeparmentCode = "KCNTT", Name = "Công nghệ thông tin" },
-                new Department { DeparmentCode = "KKT", Name = "Kinh tế"},
-                new Department { DeparmentCode = "KNN", Name = "Ngoại ngữ"},
-                new Department { DeparmentCode = "KKHMT", Name = "Khoa học máy tính"}
+                new Department { DepartmentCode = "KCNTT", Name = "Công nghệ thông tin" },
+                new Department { DepartmentCode = "KKT", Name = "Kinh tế"},
+                new Department { DepartmentCode = "KNN", Name = "Ngoại ngữ"},
+                new Department { DepartmentCode = "KKHMT", Name = "Khoa học máy tính"}
             );
         }
     }

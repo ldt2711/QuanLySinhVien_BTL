@@ -19,7 +19,8 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         public IActionResult Index(string searchString, string MajorCode)
         {
             ViewData["CurrentFilter"] = searchString; // Giữ lại giá trị tìm kiếm
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", MajorCode);
+            ViewData["CurrentMajorId"] = MajorCode;
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorCode", "Name", MajorCode);
 
             var students = _context.Students
                 .Include(s => s.Major)
@@ -59,8 +60,8 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name");
-            return View();
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorCode", "Name");
+            return View(new Student());
         }
 
         [HttpPost]
@@ -108,13 +109,13 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             }
 
             // Điền DropDownList cho chuyên ngành
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", student.MajorCode);
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorCode", "Name", student.MajorCode);
             return View(student);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age,DateOfBirth,Gender,phoneNumber,Address,Email,MajorId")] Student student) 
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age,DateOfBirth,Gender,phoneNumber,Address,Email,MajorCode")] Student student) 
         {
             if (id != student.Id)
             {
@@ -142,7 +143,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             // Nếu ModelState không hợp lệ, load lại View với dữ liệu đã nhập
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "Id", "Name", student.MajorCode);
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorCode", "Name", student.MajorCode);
             return View(student);
         }
 

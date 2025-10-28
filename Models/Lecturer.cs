@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLySinhVien_BTL.Models
 {
@@ -9,6 +10,7 @@ namespace QuanLySinhVien_BTL.Models
         public Gender Gender { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        [ForeignKey("Department")]
         public string DepartmentCode { get; set; }
         [ValidateNever]
         public Department Department { get; set; }

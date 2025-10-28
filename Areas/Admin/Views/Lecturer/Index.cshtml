@@ -15,11 +15,14 @@
     <form asp-action="Index" asp-controller="Lecturer" asp-area="Admin" method="get" class="d-flex align-items-center">
         <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm kiếm theo tên hoặc mã giảng viên..." value="@ViewData["CurrentFilter"]" />
 
-        <select name="DepartmentId" class="form-select me-2">
+        <select name="DepartmentCode" class="form-select me-2">
             <option value="">-- Lọc theo Khoa --</option>
-            @foreach (var departmentItem in ViewBag.Departments as SelectList)
+            @if (ViewBag.Departments != null)
             {
-                <option value="@departmentItem.Value" selected="@(departmentItem.Value == ViewData["CurrentDepartmentId"]?.ToString())">@departmentItem.Text</option>
+                foreach (var deptItem in ViewBag.Departments as SelectList)
+                {
+                    <option value="@deptItem.Value" selected="@(deptItem.Value == ViewData["CurrentDepartmentCode"]?.ToString())">@deptItem.Text</option>
+                }
             }
         </select>
         <button type="submit" class="btn btn-info">Tìm kiếm & Lọc</button>

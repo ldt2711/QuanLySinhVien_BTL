@@ -1,7 +1,10 @@
-﻿namespace QuanLySinhVien_BTL.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace QuanLySinhVien_BTL.Models
 {
     public class Major
     {
+        [Key]
         public string MajorCode { get; set; }
         public string Name { get; set; }
         public string Detail { get; set; }
