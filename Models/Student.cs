@@ -6,24 +6,33 @@ namespace QuanLySinhVien_BTL.Models
 {
     public class Student
     {
+        [Key]
         public int Id { get; set; }
+        [StringLength(100)]
         public string Name { get; set; }
-        public int Age { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
+
+        [StringLength(20)]
         [Required(ErrorMessage = "Số điện thoại là bắt buộc.")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Số điện thoại không hợp lệ.")]
         [Display(Name = "Số điện thoại")]
-        public string phoneNumber { get; set; }
+        public string? Phone { get; set; }
+        [StringLength(200)]
         public string Address { get; set; }
-        public string Email { get; set; }
+        [EmailAddress]
+        public string? Email { get; set; }
 
+        [ForeignKey("Major")]
         [Required(ErrorMessage = "Trường Ngành học là bắt buộc.")]
         [Display(Name = "Ngành học")]
-        public string MajorCode { get; set; }
+        public string MajorId { get; set; }
+        public Major? Major { get; set; }
 
-        // 🔹 Thuộc tính điều hướng (navigation property)
-        [ValidateNever]
-        public Major Major { get; set; }
+        [ForeignKey("User")]
+        public string? UserId { get; set; }
+        public ApplicationUser? User { get; set; }
+
+        public ICollection<Transcript>? Transcripts { get; set; }
     }
 }
