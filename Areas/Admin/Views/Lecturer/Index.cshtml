@@ -15,20 +15,19 @@
     <form asp-action="Index" asp-controller="Lecturer" asp-area="Admin" method="get" class="d-flex align-items-center">
         <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm kiếm theo tên hoặc mã giảng viên..." value="@ViewData["CurrentFilter"]" />
 
-        <select name="DepartmentCode" class="form-select me-2">
+        <select name="DepartmentId" class="form-select me-2">
             <option value="">-- Lọc theo Khoa --</option>
             @if (ViewBag.Departments != null)
             {
                 foreach (var deptItem in ViewBag.Departments as SelectList)
                 {
-                    <option value="@deptItem.Value" selected="@(deptItem.Value == ViewData["CurrentDepartmentCode"]?.ToString())">@deptItem.Text</option>
+                    <option value="@deptItem.Value" selected="@(deptItem.Value == ViewData["CurrentDepartmentId"]?.ToString())">@deptItem.Text</option>
                 }
             }
         </select>
         <button type="submit" class="btn btn-info">Tìm kiếm & Lọc</button>
     </form>
 </div>
-
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -50,7 +49,7 @@
                 <td>@lecturer.Name</td>
                 <td>@lecturer.Gender</td>
                 <td>@lecturer.Email</td>
-                <td>@lecturer.PhoneNumber</td>
+                <td>@lecturer.Phone</td>
                 <td>@(lecturer.Department?.Name)</td>
                 <td>
                     <a href="@Url.Action("Edit", "Lecturer", new { area = "Admin", id = lecturer.Id })" class="btn btn-sm btn-warning">Sửa</a>

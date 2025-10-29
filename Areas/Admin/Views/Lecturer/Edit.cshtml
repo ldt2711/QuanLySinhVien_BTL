@@ -15,39 +15,39 @@
             <input type="hidden" asp-for="Id" />
 
             <div class="mb-3">
-                <label asp-for="Name" class="form-label"></label> @* Sẽ hiển thị "Name" *@
+                <label asp-for="Name" class="form-label">Họ và tên</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Gender" class="form-label"></label> @* Sẽ hiển thị "Gender" *@
+                <label asp-for="Gender" class="form-label">Giới tính</label>
                 <select asp-for="Gender" class="form-select">
                     <option value="">-- Chọn Giới tính --</option>
-                    <option value="Male">Nam</option>
-                    <option value="Female">Nữ</option>
+                    <option value="0">Nam</option>
+                    <option value="1">Nữ</option>
                 </select>
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label> @* Sẽ hiển thị "Email" *@
+                <label asp-for="Email" class="form-label">Email</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="PhoneNumber" class="form-label"></label> @* Sẽ hiển thị "PhoneNumber" *@
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <label asp-for="Phone" class="form-label">Số điện thoại</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="DepartmentCode" class="form-label"></label> @* Sẽ hiển thị "DepartmentId" *@
-                <select asp-for="DepartmentCode" class="form-select" asp-items="@(ViewBag.Departments as SelectList)">
+                <label asp-for="DepartmentId" class="form-label">Khoa</label>
+                <select asp-for="DepartmentId" class="form-select" asp-items="@(ViewBag.Departments as SelectList)">
                     <option value="">-- Chọn Khoa --</option>
                 </select>
-                <span asp-validation-for="DepartmentCode" class="text-danger"></span>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Lưu thay đổi</button>

@@ -1,4 +1,4 @@
-﻿@model QuanLySinhVien_BTL.Models.Student;
+﻿@model QuanLySinhVien_BTL.Models.Student
 
 @{
     ViewData["Title"] = "Thêm sinh viên";
@@ -7,7 +7,7 @@
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="card shadow-lg rounded-4 border-0">
         <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
             <h3 class="mb-0">Thêm sinh viên mới</h3>
@@ -37,13 +37,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="MajorCode" class="form-label fw-bold">Ngành học</label>
-                    <select asp-for="MajorCode" asp-items="ViewBag.Majors" class="form-select">
+                    <label asp-for="MajorId" class="form-label fw-bold">Ngành học</label>
+                    <select asp-for="MajorId" asp-items="ViewBag.Majors" class="form-select">
                         <option value="">-- Chọn ngành học --</option>
                     </select>
-                    <span asp-validation-for="MajorCode" class="text-danger"></span>
+                    <span asp-validation-for="MajorId" class="text-danger"></span>
                 </div>
-
 
                 <div class="mb-3">
                     <label asp-for="Email" class="form-label fw-bold">Email</label>
@@ -58,9 +57,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="phoneNumber" class="form-label fw-bold">Số điện thoại</label>
-                    <input asp-for="phoneNumber" type="tel" class="form-control" placeholder="Nhập số điện thoại" />
-                    <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                    <label asp-for="Phone" class="form-label fw-bold">Số điện thoại</label>
+                    <input asp-for="Phone" type="tel" class="form-control" placeholder="Nhập số điện thoại" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
 
                 <div class="text-center mt-4">
