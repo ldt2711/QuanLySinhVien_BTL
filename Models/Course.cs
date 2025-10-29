@@ -21,7 +21,7 @@ namespace QuanLySinhVien_BTL.Models
         public string Year { get; set; }
         [Required]
         public float Coefficient { get; set; }
-        ICollection<Transcript>? Transcripts { get; set; }
+        public ICollection<Transcript>? Transcripts { get; set; }
 
     }
 }
