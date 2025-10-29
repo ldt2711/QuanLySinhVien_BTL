@@ -31,8 +31,14 @@ namespace QuanLySinhVien_BTL.Data
                     Email = "admin@qlsv.com",
                     EmailConfirmed = true
                 };
-                await userManager.CreateAsync(user, "1"); // mật khẩu mẫu
-                await userManager.AddToRoleAsync(user, "Admin");
+                var result = await userManager.CreateAsync(user, "Admin123!"); // mật khẩu mẫu
+                if (result.Succeeded){
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+                else
+                {
+                    Console.WriteLine($"Admin user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
             }
 
             // Giảng viên mẫu
@@ -45,8 +51,15 @@ namespace QuanLySinhVien_BTL.Data
                     Email = "giangvien@qlsv.com",
                     EmailConfirmed = true
                 };
-                await userManager.CreateAsync(user, "1");
-                await userManager.AddToRoleAsync(user, "GiangVien");
+                var result = await userManager.CreateAsync(user, "thinh123!");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "GiangVien");
+                }
+                else
+                {
+                    Console.WriteLine($"GiangVien user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
             }
 
             // Sinh viên mẫu
@@ -59,8 +72,15 @@ namespace QuanLySinhVien_BTL.Data
                     Email = "sinhvien@qlsv.com",
                     EmailConfirmed = true
                 };
-                await userManager.CreateAsync(user, "1");
-                await userManager.AddToRoleAsync(user, "SinhVien");
+                var result = await userManager.CreateAsync(user, "leethe123!");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "SinhVien");
+                }
+                else
+                {
+                    Console.WriteLine($"SinhVien user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                }
             }
         }
     }
