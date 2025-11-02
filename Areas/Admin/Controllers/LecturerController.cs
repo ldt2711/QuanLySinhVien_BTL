@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
     public class LecturerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -17,16 +16,18 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchString, string DepartmentCode)
+        public async Task<IActionResult> Index(string searchString, string DepartmentId)
         {
             ViewData["CurrentFilter"] = searchString;
-            ViewData["CurrentDepartmentId"] = DepartmentCode;
+            ViewData["CurrentDepartmentId"] = DepartmentId;
 
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentCode", "Name", DepartmentCode);
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name", DepartmentId);
+
             var lecturers = _context.Lecturers
-                                    .Include(l => l.Department) 
-                                    .AsQueryable();
+                .Include(l => l.Department)
+                .AsQueryable();
 
+            // Tìm kiếm
             if (!string.IsNullOrEmpty(searchString))
             {
                 if (int.TryParse(searchString, out int lecturerId))
@@ -40,26 +41,18 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             }
 
             // Lọc theo Khoa
-            if (!string.IsNullOrEmpty(DepartmentCode))
+            if (!string.IsNullOrEmpty(DepartmentId))
             {
-                lecturers = lecturers.Where(l => l.DepartmentCode == DepartmentCode);
-            }  
+                lecturers = lecturers.Where(l => l.DepartmentId == DepartmentId);
+            }
 
-            return View(lecturers.ToList());
+            return View(await lecturers.ToListAsync());
         }
-
-        //public IActionResult Index()
-        //{
-        //    var lecturers = _context.Lecturers
-        //        .Include(l => l.Department)
-        //        .ToList();
-        //    return View(lecturers);
-        //}
 
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentCode", "Name");
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name");
             return View(new Lecturer());
         }
 
@@ -67,25 +60,14 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Lecturer model)
         {
-            Console.WriteLine($"➡ DepartmentCode nhận được: {model.DepartmentCode}");
             if (!ModelState.IsValid)
             {
-                ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentCode", "Name", model.DepartmentCode);
+                ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name", model.DepartmentId);
                 return View(model);
             }
+
             _context.Lecturers.Add(model);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var lecturer = _context.Lecturers.Find(id);
-            if (lecturer == null)
-                return NotFound();
-            _context.Lecturers.Remove(lecturer);
-            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
@@ -93,30 +75,24 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var lecturer = await _context.Lecturers.FindAsync(id);
             if (lecturer == null)
-            {
                 return NotFound();
-            }
 
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentCode", "Name", lecturer.DepartmentCode);
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name", lecturer.DepartmentId);
             return View(lecturer);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Email,PhoneNumber,DepartmentCode")] Lecturer lecturer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Email,Phone,DepartmentId")] Lecturer lecturer)
         {
             if (id != lecturer.Id)
-            {
                 return NotFound();
-            }
 
-            if (ModelState.IsValid) // ModelState.IsValid sẽ luôn true nếu không có DataAnnotations hay lỗi kiểu dữ liệu
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -126,18 +102,27 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!LecturerExists(lecturer.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentCode", "Name", lecturer.DepartmentCode);
+
+            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name", lecturer.DepartmentId);
             return View(lecturer);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var lecturer = await _context.Lecturers.FindAsync(id);
+            if (lecturer == null)
+                return NotFound();
+
+            _context.Lecturers.Remove(lecturer);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         private bool LecturerExists(int id)

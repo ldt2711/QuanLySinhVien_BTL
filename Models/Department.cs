@@ -6,11 +6,16 @@ namespace QuanLySinhVien_BTL.Models
     public class Department
     {
         [Key]
-        public string DepartmentCode { get; set; }
+        public string DepartmentId { get; set; }
+        [StringLength(100)]
         public string Name { get; set; }
-        public DateTime DateOfEstablishment { get; set; }
 
+<<<<<<< HEAD
         public ICollection<Lecturer> Lecturers { get; set; } = new List<Lecturer>();
         public ICollection<Major> Majors { get; set; } = new List<Major>();
+=======
+        public ICollection<Major>? Majors { get; set; }
+        public ICollection<Lecturer>? Lecturers { get; set; }
+>>>>>>> 8a75d956658d41add0c2c0d9227d15bd63ad3e74
     }
 }
