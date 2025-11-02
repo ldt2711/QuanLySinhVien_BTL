@@ -27,14 +27,14 @@
     </thead>
 
     <tbody>
-        @foreach (var department in Model)
+        @foreach (var major in Model)
         {
             <tr>
-                <td>@department.MajorId</td>
-                <td>@department.Name</td>
+                <td>@major.MajorId</td>
+                <td>@major.Name</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Major", new { area = "Admin", id = department.DepartmentId })" class="btn btn-sm btn-warning">Sửa</a>
-                    <a href="@Url.Action("Delete", "Major", new { area = "Admin", id = department.DepartmentId })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ngành này?')">Xóa</a>
+                    <a href="@Url.Action("Edit", "Major", new { area = "Admin", id = major.MajorId })" class="btn btn-sm btn-warning">Sửa</a>
+                    <a href="@Url.Action("Delete", "Major", new { area = "Admin", id = major.MajorId })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ngành này?')">Xóa</a>
                 </td>
             </tr>
         }
