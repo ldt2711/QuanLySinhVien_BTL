@@ -57,10 +57,21 @@
                 <td>@student.Major?.Name</td>
                 <td>
                     <a asp-area="Admin" asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-warning">Sửa</a>
-                    <a asp-area="Admin" asp-controller="Student" asp-action="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-danger"
-                       onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">Xóa</a>
+                    <button type="button"
+                            class="btn btn-sm btn-danger btn-delete"
+                            data-id="@student.Id"
+                            data-name="@student.Name"
+                            data-delete-url="@Url.Action("Delete", "Student", new { area = "Admin" })">
+                        Xóa
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
+
+@section Scripts {
+    <script src="~/js/delete-confirm.js"></script>
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<QuanLySinhVien_BTL.Models.UserViewModel>
+
+@{
+    ViewData["Title"] = "Danh sách người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Danh sách người dùng</h2>
+
+<p>
+    <a asp-area="Admin" asp-controller="Users" asp-action="Create" class="btn btn-primary">Thêm người dùng</a>
+</p>
+
+<div class="mb-3">
+    <form asp-action="Index" asp-controller="Users" asp-area="Admin" method="get" class="d-flex align-items-center">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm theo tên hoặc email..."
+               value="@ViewData["CurrentFilter"]" />
+
+        <select name="role" class="form-select me-2">
+            <option value="">-- Lọc theo Vai trò --</option>
+            @foreach (var roleItem in ViewBag.Roles as IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)
+            {
+                <option value="@roleItem.Value" selected="@(roleItem.Value == ViewData["CurrentRole"]?.ToString())">
+                    @roleItem.Text
+                </option>
+            }
+        </select>
+        <button type="submit" class="btn btn-info">Tìm & Lọc</button>
+    </form>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Tên đăng nhập</th>
+            <th>Email</th>
+            <th>Vai trò</th>
+            <th>Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-warning">Sửa</a>
+                    <button type="button"
+                            class="btn btn-sm btn-danger btn-delete"
+                            data-id="@user.Id"
+                            data-username="@user.UserName">
+                        Xóa
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
+
+@section Scripts {
+    <script src="~/js/delete-confirm.js"></script>
+}

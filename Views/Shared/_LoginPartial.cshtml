@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<QuanLySinhVien_BTL.Models.ApplicationUser> SignInManager
+@inject UserManager<QuanLySinhVien_BTL.Models.ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+        <span class="me-2">Hello @User.Identity?.Name</span>
+        <button type="submit" class="btn btn-link">Logout</button>
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login" class="btn btn-link">Login</a>
+}

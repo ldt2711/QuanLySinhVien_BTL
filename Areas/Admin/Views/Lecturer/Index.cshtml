@@ -52,10 +52,22 @@
                 <td>@lecturer.Phone</td>
                 <td>@(lecturer.Department?.Name)</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Lecturer", new { area = "Admin", id = lecturer.Id })" class="btn btn-sm btn-warning">Sửa</a>
-                    <a href="@Url.Action("Delete", "Lecturer", new { area = "Admin", id = lecturer.Id })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa giảng viên này?')">Xóa</a>
+                    <a asp-area="Admin" asp-controller="Lecturer" asp-action="Edit" asp-route-id="@lecturer.Id" class="btn btn-sm btn-warning">Sửa</a>
+                    <button type="button"
+                            class="btn btn-sm btn-danger btn-delete"
+                            data-id="@lecturer.Id"
+                            data-name="@lecturer.Name"
+                            data-delete-url="@Url.Action("Delete", "Lecturer", new { area = "Admin" })">
+                        Xóa
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
+
+@section Scripts {
+    <script src="~/js/delete-confirm.js"></script>
+}
