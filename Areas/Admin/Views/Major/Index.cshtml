@@ -1,0 +1,42 @@
+﻿@model IEnumerable<QuanLySinhVien_BTL.Models.Major>;
+
+@{
+    ViewBag.Title = "Danh sách ngành học";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Danh sách nghành</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Major", new { area = "Admin" })" class="btn btn-primary">Thêm nghành mới</a>
+</p>
+
+<div>
+    <form asp-action="Index" asp-controller="Major" asp-area="Admin" method="get" class="d-flex align-items-center mb-3">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm kiếm theo tên ngành..." value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="btn btn-info">Tìm kiếm</button>
+    </form>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã ngành</th>
+            <th>Tên ngành</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.MajorId</td>
+                <td>@department.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Major", new { area = "Admin", id = department.DepartmentId })" class="btn btn-sm btn-warning">Sửa</a>
+                    <a href="@Url.Action("Delete", "Major", new { area = "Admin", id = department.DepartmentId })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ngành này?')">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
