@@ -147,3 +147,90 @@ body {
         margin-left: 0; /* Căn chỉnh nút toggle */
     }
 }
+
+/* --- LOGIN PAGE SPECIFIC STYLES --- */
+:root {
+    --login-bg-start: #96C8EF;
+    --login-bg-end: #5A9ACD;
+    --login-card-bg: rgba(255,255,255,0.9);
+    --login-card-radius: 25px;
+    --login-card-shadow: 0 50px 30px rgba(18,38,63,0.12);
+    --login-accent: #0d6efd; /* primary accent (button, headings) */
+    --login-btn-radius: 10px;
+    --login-btn-padding: 0.85rem 1.25rem;
+}
+
+/* Page background for login */
+.login-page {
+  background: linear-gradient(135deg, var(--login-bg-start), var(--login-bg-end));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Card / panel */
+.login-card {
+  background: var(--login-card-bg);
+  border: none;
+  border-radius: var(--login-card-radius);
+  box-shadow: var(--login-card-shadow);
+  overflow: hidden;
+}
+
+/* Optional left accent bar (visual) */
+.login-card .card-accent {
+  background: linear-gradient(180deg, rgba(13,110,253,0.12), rgba(13,110,253,0.06));
+  width: 6px;
+  border-top-left-radius: var(--login-card-radius);
+  border-bottom-left-radius: var(--login-card-radius);
+}
+
+/* Card header/title */
+.login-card .card-title {
+  color: var(--login-accent);
+  font-weight: 700;
+}
+
+/* Form inputs */
+.login-card .form-control {
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+}
+
+/* Primary login button */
+.login-btn {
+  background: linear-gradient(90deg, var(--login-accent), #0b5ed7);
+  color: #fff;
+  border: none;
+  border-radius: var(--login-btn-radius);
+  padding: var(--login-btn-padding);
+  box-shadow: 0 6px 18px rgba(13,110,253,0.12);
+
+  /* transition and animated gradient trick */
+  transition: background-position 350ms ease, background-color 250ms ease, color 250ms ease, transform 150ms ease, box-shadow 250ms ease;
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  -webkit-transition: background-position 350ms ease, background-color 250ms ease, color 250ms ease, transform 150ms ease, box-shadow 250ms ease;
+}
+
+.login-btn:hover,
+.login-btn:focus {
+    /* slide gradient and lift the button */
+    background: #67a4ff;
+    background-position: 100% 0%;
+    color: #004cbd;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(13,110,253,0.16);
+}
+
+.login-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(13,110,253,0.12);
+}
+
+/* Small responsive tweaks */
+@media (max-width: 420px) {
+  .login-card { margin: 0 1rem; }
+}

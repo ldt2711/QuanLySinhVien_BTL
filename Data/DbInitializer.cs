@@ -10,7 +10,7 @@ namespace QuanLySinhVien_BTL.Data
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            string[] roles = { "Admin", "GiangVien", "SinhVien" };
+            string[] roles = { "Admin", "Giảng Viên", "Sinh Viên" };
 
             // Tạo các vai trò mặc định nếu chưa có
             foreach (var role in roles)
@@ -54,7 +54,7 @@ namespace QuanLySinhVien_BTL.Data
                 var result = await userManager.CreateAsync(user, "thinh123!");
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "GiangVien");
+                    await userManager.AddToRoleAsync(user, "Giảng Viên");
                 }
                 else
                 {
@@ -75,7 +75,7 @@ namespace QuanLySinhVien_BTL.Data
                 var result = await userManager.CreateAsync(user, "leethe123!");
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, "SinhVien");
+                    await userManager.AddToRoleAsync(user, "Sinh Viên");
                 }
                 else
                 {
