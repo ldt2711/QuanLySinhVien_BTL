@@ -1,0 +1,53 @@
+﻿@model IEnumerable<QuanLySinhVien_BTL.Models.Course>;
+
+@{
+    ViewBag.Title = "Danh sách khóa học";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Danh sách khóa học</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Course", new { area = "Admin" })" class="btn btn-primary">Thêm khóa học mới</a>
+</p>
+
+<div>
+    <form asp-action="Index" asp-controller="Course" asp-area="Admin" method="get" class="d-flex align-items-center mb-3">
+        <input type="text" name="searchString" class="form-control me-2" placeholder="Tìm kiếm theo tên khóa học..." value="@ViewData["CurrentFilter"]" />
+        <button type="submit" class="btn btn-info">Tìm kiếm</button>
+    </form>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã khóa học</th>
+            <th>Tên khóa học</th>
+            <th>Kì</th>
+            <th>Năm học</th>
+            <th>Giảng viên</th>
+            <th>Ngành</th>
+            <th>Hệ số</th>
+            <th>Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.CourseId</td>
+                <td>@course.CourseName</td>
+                <td>@course.Semester</td>
+                <td>@course.Year</td>
+                <td>@course.Lecturer?.Name</td>
+                <td>@course.Major?.Name</td>
+                <td>@course.Coefficient</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Course" asp-action="Edit" asp-route-id="@course.CourseId" class="btn btn-sm btn-warning">Sửa</a>
+                    <a asp-area="Admin" asp-controller="Course" asp-action="Delete" asp-route-id="@course.CourseId" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Bạn có chắc chắn muốn xóa khóa học này?')">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>    

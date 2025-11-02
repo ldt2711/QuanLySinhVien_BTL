@@ -1,0 +1,66 @@
+﻿@model QuanLySinhVien_BTL.Models.Course
+
+@{
+    ViewData["Title"] = "Chỉnh sửa khóa học";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Chỉnh sửa thông tin khóa học</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" asp-controller="Course" asp-area="Admin" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="CourseId" />
+
+            <div class="mb-3">
+                <label asp-for="CourseName" class="form-label fw-bold"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Semester" class="form-label fw-bold"></label>
+                <input asp-for="Semester" class="form-control" />
+                <span asp-validation-for="Semester" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Year" class="form-label fw-bold"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LecturerId" class="form-label fw-bold"></label>
+                <select asp-for="LecturerId" class="form-select" asp-items="@(ViewBag.Lecturers as SelectList)">
+                    <option value="">-- Chọn Giảng viên --</option>
+                </select>
+                <span asp-validation-for="LecturerId" class="text-danger"></span>
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="MajorId" class="form-label fw-bold"></label>
+                <select asp-for="MajorId" class="form-select" asp-items="@(ViewBag.Majors as SelectList)">
+                    <option value="">-- Chọn Ngành học --</option>
+                </select>
+                <span asp-validation-for="MajorId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Coefficient" class="form-label fw-bold"></label>
+                <input asp-for="Coefficient" class="form-control" />
+                <span asp-validation-for="Coefficient" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <a asp-area="Admin" asp-controller="Course" asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
