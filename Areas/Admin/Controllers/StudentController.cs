@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien_BTL.Data;
-using QuanLySinhVien_BTL.Models;
 
 namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 {
@@ -52,12 +51,12 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorId", "Name");
-            return View(new Student());
+            return View(new Models.Student());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Student model)
+        public async Task<IActionResult> Create(Models.Student model)
         {
             if (!ModelState.IsValid)
             {
@@ -86,7 +85,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DateOfBirth,Gender,Phone,Address,Email,MajorId")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DateOfBirth,Gender,Phone,Address,Email,MajorId")] Models.Student student)
         {
             if (id != student.Id)
                 return NotFound();

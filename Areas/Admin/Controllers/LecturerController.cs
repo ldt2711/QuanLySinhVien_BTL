@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien_BTL.Data;
-using QuanLySinhVien_BTL.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
@@ -53,12 +52,12 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name");
-            return View(new Lecturer());
+            return View(new Models.Lecturer());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Lecturer model)
+        public async Task<IActionResult> Create(Models.Lecturer model)
         {
             if (!ModelState.IsValid)
             {
@@ -87,7 +86,7 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Email,Phone,DepartmentId")] Lecturer lecturer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Email,Phone,DepartmentId")] Models.Lecturer lecturer)
         {
             if (id != lecturer.Id)
                 return NotFound();
