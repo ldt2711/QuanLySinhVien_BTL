@@ -1,0 +1,35 @@
+﻿@model QuanLySinhVien_BTL.Models.Transcript
+
+@{
+    ViewData["Title"] = "Chỉnh sửa bảng điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Chỉnh sửa bảng điểm</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" asp-controller="Transcript" asp-area="Admin" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="TranscriptId"/>
+            <input type="hidden" asp-for="StudentId" />
+            <input type="hidden" asp-for="CourseId" />
+
+
+            <div class="mb-3">
+                <label asp-for="ProcessGrade" class="form-label fw-bold"></label>
+                <input asp-for="ProcessGrade" class="form-control" />
+                <span asp-validation-for="ProcessGrade" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="FinalGrade" class="form-label fw-bold"></label>
+                <input asp-for="FinalGrade" class="form-control" />
+                <span asp-validation-for="FinalGrade" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            <a asp-area="Admin" asp-controller="Transcript" asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        </form>
+    </div>
+</div>

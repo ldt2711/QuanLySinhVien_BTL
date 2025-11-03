@@ -3,13 +3,36 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Chào mừng quản trị viên đến với hệ thống!</h1>
-<p>Hãy chọn một chức năng bên dưới để bắt đầu:</p>
+<h1 class="mb-4 text-center fw-bold text-primary">
+    👋 Chào mừng quản trị viên đến với hệ thống quản lý sinh viên!
+</h1>
 
-<div class="d-flex gap-2">
-    <a asp-area="Admin" asp-controller="Lecturer" asp-action="Index" class="btn btn-primary">Quản lý giảng viên</a>
-    <a asp-area="Admin" asp-controller="Student" asp-action="Index" class="btn btn-success">Quản lý sinh viên</a>
-    <a asp-area="Admin" asp-controller="Department" asp-action="Index" class="btn btn-info">Quản lý khoa</a>
-    <a asp-area="Admin" asp-controller="Major" asp-action="Index" class="btn btn-warning">Quản lý ngành</a>
-    <a asp-area="Admin" asp-controller="Course" asp-action="Index" class="btn btn-danger">Quản lý lớp học phần</a>
+<p class="text-center fs-5 mb-5 text-muted">Hãy chọn một chức năng bên dưới để bắt đầu:</p>
+
+<div class="d-flex flex-wrap justify-content-center gap-3">
+
+    <a asp-area="Admin" asp-controller="Lecturer" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
+        <i class="bi bi-person-badge-fill me-2"></i> Quản lý giảng viên
+    </a>
+
+    <a asp-area="Admin" asp-controller="Student" asp-action="Index" class="btn btn-success btn-lg p-3 shadow-lg">
+        <i class="bi bi-mortarboard-fill me-2"></i> Quản lý sinh viên
+    </a>
+
+    <a asp-area="Admin" asp-controller="Department" asp-action="Index" class="btn btn-info btn-lg p-3 shadow-lg text-white">
+        <i class="bi bi-building me-2"></i> Quản lý khoa
+    </a>
+
+    <a asp-area="Admin" asp-controller="Major" asp-action="Index" class="btn btn-warning btn-lg p-3 shadow-lg">
+        <i class="bi bi-diagram-3-fill me-2"></i> Quản lý ngành
+    </a>
+
+    <a asp-area="Admin" asp-controller="Course" asp-action="Index" class="btn btn-danger btn-lg p-3 shadow-lg">
+        <i class="bi bi-journal-code me-2"></i> Quản lý lớp học phần
+    </a>
+
+    <a asp-area="Admin" asp-controller="Transcript" asp-action="Index" class="btn btn-secondary btn-lg p-3 shadow-lg">
+        <i class="bi bi-file-earmark-bar-graph-fill me-2"></i> Quản lý bảng điểm
+    </a>
 </div>
+

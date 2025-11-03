@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<QuanLySinhVien_BTL.Models.Transcript>
+
 @{
+    ViewData["Title"] = "Danh sách bảng điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Danh sách bảng điểm</h2>
+
+<p>
+    <a asp-area="Admin" asp-controller="Transcript" asp-action="Create" class="btn btn-primary">Thêm bảng điểm</a>
+</p>
+
+<div class="mb-3">
+    <form asp-action="Index" asp-controller="Transcript" method="get" class="d-flex algin-items-center">
+        <select name="CourseId" class="form-select ms-3" onchange="this.form.submit()">
+            <option value="">-- Lọc theo Khóa học --</option>
+           @foreach (var courseItem in ViewBag.Courses as SelectList)
+           {
+               <option value="@courseItem.Value" selected="@(courseItem.Value == ViewData["CurrentCourseId"]?.ToString())">
+                   @courseItem.Text
+               </option>
+            }
+
+        </select>
+        <button type="submit" class="btn btn-info ms-2">Lọc</button>
+    </form>
+</div>
+
+<table class="table table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>MSSV</th>
+            <th>Tên sinh viên</th>
+            <th>Tên khóa học</th>
+            <th>Điểm quá trình</th>
+            <th>Điểm cuối kì</th>
+            <th>GPA</th>
+            <th>Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transcript in Model)
+        {
+            <tr>
+                <td>@transcript.TranscriptId</td>
+                <td>@transcript.StudentId</td>
+                <td>@transcript.Student?.Name</td>
+                <td>@transcript.Course?.CourseName</td>
+                <td>@transcript.ProcessGrade</td>
+                <td>@transcript.FinalGrade</td>
+                <td>@(transcript.GPA?.ToString("0.00") ?? "—")</td>
+                <td>
+                    <a asp-area="Admin" asp-controller="Transcript" asp-action="Edit" asp-route-id="@transcript.TranscriptId" class="btn btn-sm btn-warning">Sửa</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
+
+@section Scripts {
+    <script src="~/js/delete-confirm.js"></script>
 }

@@ -17,6 +17,6 @@ namespace QuanLySinhVien_BTL.Models
         public double? FinalGrade { get; set; }
 
         [NotMapped]
-        public double? GPA => ProcessGrade * Course.Coefficient + FinalGrade * (1 - Course.Coefficient);
+        public double? GPA { get; set; }
     }
 }

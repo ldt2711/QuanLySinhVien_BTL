@@ -1,0 +1,63 @@
+﻿@model QuanLySinhVien_BTL.Models.Transcript
+
+@{
+    ViewData["Title"] = "Thêm bảng điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container mt-4">
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
+            <h3 class="mb-0">Thêm bảng điểm mới</h3>
+        </div>
+        <div class="card-body p-4">
+            <form asp-area="Admin" asp-controller="Transcript" asp-action="Create" method="post">
+                
+                <div class="mb-3">
+                    <label asp-for="StudentId" class="form-label fw-bold">Sinh viên</label>
+                    <select asp-for="StudentId" asp-items="ViewBag.Students" class="form-select">
+                        <option value="">-- Chọn sinh viên --</option>
+                    </select>
+                    <span asp-validation-for="StudentId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CourseId" class="form-label fw-bold">Khóa học</label>
+                    <select asp-for="CourseId" asp-items="ViewBag.Courses" class="form-select">
+                        <option value="">-- Chọn khóa học --</option>
+                    </select>
+                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ProcessGrade" class="form-label fw-bold">Điểm quá trình</label>
+                    <input asp-for="ProcessGrade" class="form-control" placeholder="Nhập điểm quá trình" />
+                    <span asp-validation-for="ProcessGrade" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="FinalGrade" class="form-label fw-bold">Điểm cuối kì</label>
+                    <input asp-for="FinalGrade" class="form-control" placeholder="Nhập điểm cuối kì" />
+                    <span asp-validation-for="FinalGrade" class="text-danger"></span>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success px-4 me-2">
+                        <i class="bi bi-save"></i> Lưu bảng điểm
+                    </button>
+                    <a asp-area="Admin" asp-controller="Transcript" asp-action="Index" class="btn btn-secondary px-4">
+                        <i class="bi bi-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
