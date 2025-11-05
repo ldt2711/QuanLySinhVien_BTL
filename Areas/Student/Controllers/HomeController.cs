@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using QuanLySinhVien_BTL.Models;
+using System.Threading.Tasks;
 
 namespace QuanLySinhVien_BTL.Areas.Student.Controllers
 {
@@ -7,9 +10,23 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
     [Authorize(Roles = "Sinh Viên")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public HomeController(UserManager<ApplicationUser> userManager)
         {
-            return View();
+            _userManager = userManager;
+        }
+       public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var model = new UserViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email
+            };
+
+            return View(model);
         }
     }
 }
