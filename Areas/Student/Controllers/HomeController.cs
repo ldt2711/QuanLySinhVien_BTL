@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace QuanLySinhVien_BTL.Areas.Student.Controllers
 {
     [Area("Student")]
-    [Authorize(Roles = "SinhVien")]
+    [Authorize(Roles = "Sinh Viên")]
     public class HomeController : Controller
     {
         public IActionResult Index()
