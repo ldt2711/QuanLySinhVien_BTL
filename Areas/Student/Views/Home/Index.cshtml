@@ -9,3 +9,53 @@
     Chào mừng @Model.UserName đến với hệ thống quản lý sinh viên!
 </h1>
 
+<div class="container mt-5">
+    <h2 class="mb-3 text-secondary">Tin tức & Thông báo</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th style="width: 15%;">Ngày</th>
+                <th>Tiêu đề</th>
+                <th style="width: 25%;">Chi tiết</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2023-10-26</td>
+                <td>Lịch thi cuối kỳ đã được công bố</td>
+                <td><a href="#" class="btn btn-sm btn-info">Xem chi tiết</a></td>
+            </tr>
+            <tr>
+                <td>2023-10-25</td>
+                <td>Thông báo về học bổng học kỳ mới</td>
+                <td><a href="#" class="btn btn-sm btn-info">Xem chi tiết</a></td>
+            </tr>
+            <tr>
+                <td>2023-10-24</td>
+                <td>Hạn chót nộp bài tập lớn môn Cấu trúc dữ liệu</td>
+                <td><a href="#" class="btn btn-sm btn-info">Xem chi tiết</a></td>
+            </tr>
+            <tr>
+                <td>2023-10-23</td>
+                <td>Sự kiện Ngày hội việc làm 2023</td>
+                <td><a href="#" class="btn btn-sm btn-info">Xem chi tiết</a></td>
+            </tr>
+            <!-- Thêm nhiều dòng tin tức khác tại đây -->
+        </tbody>
+    </table>
+
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+
+        <a asp-area="Student" asp-controller="StudentProfile" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-user-graduate me-2 bi bi-person-badge-fill me-2"></i> Thông tin sinh viên
+        </a>
+
+        <a asp-area="Student" asp-controller="StudentCourse" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-book me-2 bi bi-person-badge-fill me-2"></i> Đăng ký lớp học phần
+        </a>
+
+        <a asp-area="Student" asp-controller="StudentScore" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-chart-line me-2 bi bi-person-badge-fill me-2"></i> Điểm học phần
+        </a>
+
+    </div>

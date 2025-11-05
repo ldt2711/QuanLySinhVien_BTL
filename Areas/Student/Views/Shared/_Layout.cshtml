@@ -21,16 +21,12 @@
         <div class="bg-dark border-end sidebar-wrapper" id="sidebar-wrapper">
             <div class="sidebar-heading bg-dark text-white p-3 border-bottom">Quản Lý SV</div>
             <div class="list-group list-group-flush">
-                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-home me-2"></i> Trang chủ</a>
-                <a asp-area="Admin" asp-controller="Student" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-graduate me-2"></i>Sinh viên</a>
-                <a asp-area="Admin" asp-controller="Lecturer" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-chalkboard-teacher me-2"></i>Quản lý giảng viên</a>
-                <a asp-area="Admin" asp-controller="Department" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-building me-2"></i> Quản lý khoa</a>
-                <a asp-area="Admin" asp-controller="Major" asp-action="Index" class="list-group-item" list-group-item-action bg-dark text-white"><i class="fa-layer-group me-2"></i>Quản lý ngành</a>
-                <a asp-area="Admin" asp-controller="Course" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-book me-2"></i> Quản lý lớp học phần</a>
-                <a asp-area="Admin" asp-controller="Transcript" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-chart-line me-2"></i> Quản lý điểm</a>
+                <a asp-area="Student" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-home me-2"></i> Trang chủ</a>
+                <a asp-area="Student" asp-controller="StudentProfile" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-graduate me-2"></i>Thông tin sinh viên</a>
+                <a asp-area="Student" asp-controller="StudentCourse" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-book me-2"></i> Đăng ký lớp học phần</a>
+                <a asp-area="Student" asp-controller="StudentScore" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-chart-line me-2"></i> Điểm học phần</a>
                 <div class="sidebar-divider my-2 border-top border-secondary"></div>
-                <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-friends me-2"></i> Vai trò thành viên</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-key me-2"></i> Bài viết điều khoản</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-question-circle me-2"></i> Hỗ trợ & Câu hỏi</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
