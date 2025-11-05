@@ -1,16 +1,16 @@
 ﻿@model QuanLySinhVien_BTL.Models.Course
 
 @{
-    ViewData["Title"] = "Thêm khóa học";
+    ViewData["Title"] = "Thêm lớp học phần";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div asp-validation-summary="All" class="text-danger"></div>
+<div asp-validation-summary="None" class="text-danger"></div>
 
 <div class="container mt-4">
     <div class="card shadow-lg rounded-4 border-0">
         <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-            <h3 class="mb-0">Thêm khóa học mới</h3>
+            <h3 class="mb-0">Thêm lớp học phần mới</h3>
         </div>
         <div class="card-body p-4">
             <form asp-area="Admin" asp-controller="Course" asp-action="Create" method="post">
@@ -35,7 +35,7 @@
             <div class="mb-3">
                 <label asp-for="LecturerId" class="form-label fw-bold">Giảng viên</label>
                 <select asp-for="LecturerId" asp-items="ViewBag.Lecturers" class="form-select">
-                    <option value="">-- Chọn giảng viên --</option>
+                    <option value="0">-- Chọn giảng viên --</option>
                 </select>
                 <span asp-validation-for="LecturerId" class="text-danger"></span>
             </div>
@@ -56,9 +56,9 @@
 
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-success px-4 me-2">
-                    <i class="bi bi-save"></i> Lưu khóa học
+                    <i class="bi bi-save"></i> Lưu lớp học phần
                 </button>
-                <a asp-area="Admin" asp-controller="Lecturer" asp-action="Index" class="btn btn-secondary px-4">
+                <a asp-area="Admin" asp-controller="Course" asp-action="Index" class="btn btn-secondary px-4">
                     <i class="bi bi-arrow-left"></i> Quay lại
                 </a>
             </div>

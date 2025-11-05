@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div asp-validation-summary="All" class="text-danger"></div>
+<div asp-validation-summary="None" class="text-danger"></div>
 
 <div class="container mt-5">
     <div class="card shadow-lg rounded-4 border-0">
@@ -32,7 +32,7 @@
                     <button type="submit" class="btn btn-success px-4 me-2">
                         <i class="bi bi-save"></i> Lưu khoa
                     </button>
-                    <a asp-area="Admin" asp-controller="Lecturer" asp-action="Index" class="btn btn-secondary px-4">
+                    <a asp-area="Admin" asp-controller="Department" asp-action="Index" class="btn btn-secondary px-4">
                         <i class="bi bi-arrow-left"></i> Quay lại
                     </a>
                 </div>

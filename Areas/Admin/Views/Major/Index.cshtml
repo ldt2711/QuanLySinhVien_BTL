@@ -23,6 +23,7 @@
         <tr>
             <th>Mã ngành</th>
             <th>Tên ngành</th>
+            <th>Tác vụ</th>
         </tr>
     </thead>
 
@@ -34,9 +35,22 @@
                 <td>@major.Name</td>
                 <td>
                     <a href="@Url.Action("Edit", "Major", new { area = "Admin", id = major.MajorId })" class="btn btn-sm btn-warning">Sửa</a>
-                    <a href="@Url.Action("Delete", "Major", new { area = "Admin", id = major.MajorId })" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa ngành này?')">Xóa</a>
+                    <button type="button"
+                            class="btn btn-sm btn-danger btn-delete"
+                            data-id="@major.MajorId"
+                            data-name="@major.Name"
+                            data-delete-url="@Url.Action("Delete", "Major", new { area = "Admin" })">
+                        Xóa
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
+@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
+
+@section Scripts {
+    <script src="~/js/delete-confirm.js"></script>
+}

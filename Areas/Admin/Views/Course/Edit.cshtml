@@ -1,15 +1,15 @@
 ﻿@model QuanLySinhVien_BTL.Models.Course
 
 @{
-    ViewData["Title"] = "Chỉnh sửa khóa học";
+    ViewData["Title"] = "Chỉnh sửa lớp học phần";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="mb-4">Chỉnh sửa thông tin khóa học</h2>
+<h2 class="mb-4">Chỉnh sửa thông tin lớp học phần</h2>
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Edit" asp-controller="Course" asp-area="Admin" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="None" class="text-danger"></div>
 
             <input type="hidden" asp-for="CourseId" />
 
@@ -34,7 +34,7 @@
             <div class="mb-3">
                 <label asp-for="LecturerId" class="form-label fw-bold"></label>
                 <select asp-for="LecturerId" class="form-select" asp-items="@(ViewBag.Lecturers as SelectList)">
-                    <option value="">-- Chọn Giảng viên --</option>
+                    <option value="0">-- Chọn Giảng viên --</option>
                 </select>
                 <span asp-validation-for="LecturerId" class="text-danger"></span>
             </div>

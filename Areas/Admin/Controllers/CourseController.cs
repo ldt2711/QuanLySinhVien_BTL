@@ -56,6 +56,10 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Course model)
         {
+            if (model.LecturerId == 0)
+            {
+                ModelState.AddModelError("LecturerId", "Phải chọn giảng viên.");
+            }
             if (!ModelState.IsValid)
             {
                 ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorId", "Name", model.MajorId);
@@ -84,6 +88,10 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Course model)
         {
+            if (model.LecturerId == 0)
+            {
+                ModelState.AddModelError("LecturerId", "Phải chọn giảng viên.");
+            }
             if (id != model.CourseId)
             {
                 return NotFound();

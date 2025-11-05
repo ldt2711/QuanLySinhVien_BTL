@@ -14,7 +14,7 @@
 <div class="mb-3">
     <form asp-action="Index" asp-controller="Transcript" method="get" class="d-flex algin-items-center">
         <select name="CourseId" class="form-select ms-3" onchange="this.form.submit()">
-            <option value="">-- Lọc theo Khóa học --</option>
+            <option value="">-- Lọc theo Lớp học phần --</option>
            @foreach (var courseItem in ViewBag.Courses as SelectList)
            {
                <option value="@courseItem.Value" selected="@(courseItem.Value == ViewData["CurrentCourseId"]?.ToString())">
@@ -33,7 +33,7 @@
             <th>Id</th>
             <th>MSSV</th>
             <th>Tên sinh viên</th>
-            <th>Tên khóa học</th>
+            <th>Tên lớp học phần</th>
             <th>Điểm quá trình</th>
             <th>Điểm cuối kì</th>
             <th>GPA</th>
@@ -59,9 +59,3 @@
 
     </tbody>
 </table>
-
-@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
-
-@section Scripts {
-    <script src="~/js/delete-confirm.js"></script>
-}

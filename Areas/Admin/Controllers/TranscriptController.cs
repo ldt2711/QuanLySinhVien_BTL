@@ -70,6 +70,14 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Transcript model)
         {
+            if (model.StudentId == 0)
+            {
+                ModelState.AddModelError("StudentId", "Phải chọn sinh viên.");
+            }
+            if (model.CourseId == 0)
+            {
+                ModelState.AddModelError("CourseId", "Phải chọn lớp học phần.");
+            }
             if (ModelState.IsValid)
             {
 
