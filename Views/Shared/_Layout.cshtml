@@ -13,6 +13,8 @@
 
     <!-- Your site stylesheet -->
     <link rel="stylesheet" href="~/css/site.css" />
+
+    @RenderSection("Head", required: false)
 </head>
 <body style="position: relative; min-height: 100vh;">
 
@@ -35,5 +37,6 @@
     <script src="~/js/site.js"></script>
 
     @RenderSection("Scripts", required: false)
+    @RenderSection("AreaScripts", required: false)
 </body>
 </html>
