@@ -21,7 +21,7 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
             _userManager = userManager;
         }
        public async Task<IActionResult> Index()
-        {
+       {
             var user = await _userManager.GetUserAsync(User);
             string displayName = "Sinh viên";
 
@@ -50,6 +50,6 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
 
 
             return View(model);
-        }
+       }
     }
 }

@@ -62,16 +62,16 @@ body {
     color: #f8f9fa !important; /* Màu chữ trắng nhạt */
 }
 
-    .list-group-item.active {
-        background-color: #0d6efd !important; /* Màu nền cho mục đang active */
-        color: #fff !important; /* Màu chữ cho mục đang active */
-        border-radius: 0; /* Bỏ border-radius nếu Bootstrap thêm vào */
-    }
+.list-group-item.active {
+    background-color: #0d6efd !important; /* Màu nền cho mục đang active */
+    color: #fff !important; /* Màu chữ cho mục đang active */
+    border-radius: 0; /* Bỏ border-radius nếu Bootstrap thêm vào */
+}
 
-    .list-group-item:hover {
-        background-color: rgba(255, 255, 255, 0.1) !important; /* Hover effect */
-        color: #fff !important;
-    }
+.list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* Hover effect */
+    color: #fff !important;
+}
 
 .sidebar-divider {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -89,19 +89,19 @@ body {
     position: relative; /* Quan trọng để z-index của navbar con hoạt động đúng */
 }
 
-    /* Navbar trong Page Content Wrapper */
-    #page-content-wrapper .navbar {
-        position: sticky; /* Đặt navbar là sticky, nó sẽ dính vào trên cùng khi cuộn */
-        top: 0; /* Quan trọng cho sticky */
-        z-index: 1040; /* Đặt z-index cao hơn navbar mặc định nhưng thấp hơn sidebar nếu cần */
-        background-color: #f8f9fa !important; /* Đảm bảo màu nền để không bị nhìn xuyên qua */
-    }
-    /* Các phần bên trong page-content-wrapper */
-    #page-content-wrapper > .container-fluid {
-        flex-grow: 1; /* Cho phép phần nội dung chính này giãn ra để đẩy footer xuống dưới */
-        /* Thêm padding-top nếu bạn không dùng sticky navbar và navbar có position: fixed */
-        /* padding-top: 56px; */
-    }
+/* Navbar trong Page Content Wrapper */
+#page-content-wrapper .navbar {
+    position: sticky; /* Đặt navbar là sticky, nó sẽ dính vào trên cùng khi cuộn */
+    top: 0; /* Quan trọng cho sticky */
+    z-index: 1040; /* Đặt z-index cao hơn navbar mặc định nhưng thấp hơn sidebar nếu cần */
+    background-color: #f8f9fa !important; /* Đảm bảo màu nền để không bị nhìn xuyên qua */
+}
+/* Các phần bên trong page-content-wrapper */
+#page-content-wrapper > .container-fluid {
+    flex-grow: 1; /* Cho phép phần nội dung chính này giãn ra để đẩy footer xuống dưới */
+    /* Thêm padding-top nếu bạn không dùng sticky navbar và navbar có position: fixed */
+    /* padding-top: 56px; */
+}
 
 
 /* --- TOGGLE EFFECT (When sidebar is hidden) --- */

@@ -50,7 +50,7 @@
                 <td>@transcript.Course?.CourseName</td>
                 <td>@transcript.ProcessGrade</td>
                 <td>@transcript.FinalGrade</td>
-                <td>@(transcript.GPA?.ToString("0.00") ?? "—")</td>
+                <td>@(transcript.GPA?.ToString("0.0") ?? "—")</td>
                 <td>
                     <a asp-area="Admin" asp-controller="Transcript" asp-action="Edit" asp-route-id="@transcript.TranscriptId" class="btn btn-sm btn-warning">Sửa</a>
                 </td>
