@@ -1,0 +1,86 @@
+﻿@model QuanLySinhVien_BTL.Models.Student
+
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg profile-card">
+                <div class="card-header bg-primary text-white text-center py-3 rounded-top-lg">
+                    <h3 class="mb-0">Thông tin cá nhân</h3>
+                </div>
+                <div class="card-body p-4">
+                    @if (Model != null)
+                    {
+                        <div class="row mb-3">
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">MSSV:</strong>
+                                <p class="lead mb-0">@Model.Id</p>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">Email:</strong>
+                                <p class="lead mb-0">@Model.Email</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">Họ tên:</strong>
+                                <p class="lead mb-0">@Model.Name</p>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">SĐT:</strong>
+                                <p class="lead mb-0">@Model.Phone</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">Giới tính:</strong>
+                                <p class="lead mb-0">@Model.Gender</p>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">Địa chỉ:</strong>
+                                <p class="lead mb-0">@Model.Address</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">Ngày sinh:</strong>
+                                <p class="lead mb-0">@Model.DateOfBirth.ToShortDateString()</p>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <strong class="d-block text-muted">Ngành học:</strong>
+                                <p class="lead mb-0">@Model.Major?.Name</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <a asp-action="Edit" class="btn btn-primary btn-lg custom-edit-btn">
+                                <i class="fas fa-edit me-2"></i> Chỉnh sửa thông tin
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning text-center" role="alert">
+                            Không tìm thấy thông tin sinh viên của bạn.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Views/Shared/_DeleteConfirmationModal.cshtml")
+
+@section Scripts {
+    <script src="~/js/delete-confirm.js"></script>
+}

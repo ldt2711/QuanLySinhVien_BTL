@@ -234,3 +234,57 @@ body {
 @media (max-width: 420px) {
   .login-card { margin: 0 1rem; }
 }
+
+/* Trong wwwroot/css/site.css hoặc một file CSS mới */
+
+/* Custom styles for profile card */
+.profile-card {
+    border-radius: 15px !important; /* Bo tròn góc nhiều hơn */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.1); /* Shadow đẹp hơn */
+}
+
+    .profile-card .card-header {
+        background-image: linear-gradient(to right, #007bff, #0056b3); /* Gradient màu xanh đẹp */
+        border-bottom: none; /* Bỏ đường viền dưới header */
+        border-top-left-radius: 15px !important;
+        border-top-right-radius: 15px !important;
+    }
+
+    .profile-card .card-body p.lead {
+        font-size: 1.15rem; /* Tăng kích thước chữ cho thông tin chính */
+        color: #004085; /* Màu chữ đậm hơn */
+        margin-bottom: 0.5rem; /* Khoảng cách dưới mỗi đoạn thông tin */
+    }
+
+    .profile-card .card-body strong.text-muted {
+        font-size: 0.9rem; /* Kích thước chữ cho label nhỏ hơn */
+        color: #6c757d !important; /* Màu xám đậm hơn một chút */
+        text-transform: uppercase; /* Chữ hoa cho label */
+        margin-bottom: 0.25rem;
+    }
+
+    .profile-card .text-center {
+        padding-top: 1rem;
+        border-top: 1px solid #eee; /* Đường kẻ phân cách cho nút */
+    }
+
+.custom-edit-btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 40px; /* Nút bo tròn */
+    background-image: linear-gradient(to right, #28a745, #218838); /* Gradient màu xanh lá */
+    border: none;
+    transition: all 0.3s ease;
+}
+
+    .custom-edit-btn:hover {
+        transform: translateY(-2px); /* Hiệu ứng nhấc lên khi hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-image: linear-gradient(to right, #218838, #1e7e34);
+    }
+
+/* Biểu tượng (nếu bạn muốn thêm, cần Font Awesome) */
+.profile-card .card-body i {
+    color: #007bff; /* Màu biểu tượng */
+    margin-right: 8px;
+}

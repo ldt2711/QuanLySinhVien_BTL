@@ -1,0 +1,51 @@
+﻿@model QuanLySinhVien_BTL.ViewModels.StudentEditViewModel
+
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Chỉnh sửa hồ sơ</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" /> @* Id của sinh viên *@
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" readonly /> @* Không cho sửa tên *@
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly /> @* Không cho sửa email *@
+            </div>
+            <div class="form-group">
+                <label asp-for="MajorName" class="control-label">Ngành học</label>
+                <input asp-for="MajorName" class="form-control" readonly /> @* Không cho sửa ngành *@
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                <a asp-action="MyProfile" class="btn btn-secondary">Hủy</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

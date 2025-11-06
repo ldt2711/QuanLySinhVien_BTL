@@ -1,0 +1,28 @@
+﻿@model QuanLySinhVien_BTL.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "Trang chủ Giảng viên";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-4 text-center fw-bold text-primary">
+    Chào mừng @Model.DisplayName đến với hệ thống quản lý giảng viên!
+</h1>
+
+<div class="container mt-5">    
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+
+        <a asp-area="Lecuturer" asp-controller="LecturerProfile" asp-action="MyProfile" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-user-graduate me-2"></i> Thông tin sinh viên
+        </a>
+
+        <a asp-area="Student" asp-controller="StudentCourse" asp-action="MyCourse" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-book me-2"></i> Đăng ký lớp học phần
+        </a>
+
+        <a asp-area="Student" asp-controller="StudentScore" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-chart-line me-2"></i> Điểm học phần
+        </a>
+
+    </div>
+</div>
