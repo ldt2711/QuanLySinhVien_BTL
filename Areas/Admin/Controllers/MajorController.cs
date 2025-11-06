@@ -77,7 +77,8 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string? id)
         {
             var major = await _context.Majors.FindAsync(id);

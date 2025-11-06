@@ -50,7 +50,8 @@
                     <button type="button"
                             class="btn btn-sm btn-danger btn-delete"
                             data-id="@user.Id"
-                            data-username="@user.UserName">
+                            data-username="@user.UserName"
+                            data-delete-url="@Url.Action("Delete", "Users", new { area = "Admin" })">
                         Xóa
                     </button>
                 </td>

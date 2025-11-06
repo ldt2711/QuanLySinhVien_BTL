@@ -107,7 +107,8 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             var course = await _context.Courses.FindAsync(id);

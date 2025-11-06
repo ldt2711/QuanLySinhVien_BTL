@@ -42,46 +42,46 @@ namespace QuanLySinhVien_BTL.Data
             }
 
             // Giảng viên mẫu
-            var gvUser = await userManager.FindByEmailAsync("giangvien@qlsv.com");
-            if (gvUser == null)
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = "thinh",
-                    Email = "giangvien@qlsv.com",
-                    EmailConfirmed = true
-                };
-                var result = await userManager.CreateAsync(user, "thinh123!");
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Giảng Viên");
-                }
-                else
-                {
-                    Console.WriteLine($"GiangVien user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-                }
-            }
+            //var gvUser = await userManager.FindByEmailAsync("giangvien@qlsv.com");
+            //if (gvUser == null)
+            //{
+            //    var user = new ApplicationUser
+            //    {
+            //        UserName = "thinh",
+            //        Email = "giangvien@qlsv.com",
+            //        EmailConfirmed = true
+            //    };
+            //    var result = await userManager.CreateAsync(user, "thinh123!");
+            //    if (result.Succeeded)
+            //    {
+            //        await userManager.AddToRoleAsync(user, "Giảng Viên");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine($"GiangVien user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+            //    }
+            //}
 
-            // Sinh viên mẫu
-            var svUser = await userManager.FindByEmailAsync("sinhvien@qlsv.com");
-            if (svUser == null)
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = "leethe",
-                    Email = "sinhvien@qlsv.com",
-                    EmailConfirmed = true
-                };
-                var result = await userManager.CreateAsync(user, "leethe123!");
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Sinh Viên");
-                }
-                else
-                {
-                    Console.WriteLine($"SinhVien user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-                }
-            }
+            //// Sinh viên mẫu
+            //var svUser = await userManager.FindByEmailAsync("sinhvien@qlsv.com");
+            //if (svUser == null)
+            //{
+            //    var user = new ApplicationUser
+            //    {
+            //        UserName = "leethe",
+            //        Email = "sinhvien@qlsv.com",
+            //        EmailConfirmed = true
+            //    };
+            //    var result = await userManager.CreateAsync(user, "leethe123!");
+            //    if (result.Succeeded)
+            //    {
+            //        await userManager.AddToRoleAsync(user, "Sinh Viên");
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine($"SinhVien user creation failed: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+            //    }
+            //}
         }
     }
 }

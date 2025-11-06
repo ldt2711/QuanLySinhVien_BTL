@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien_BTL.Data;
+using QuanLySinhVien_BTL.Models;
 
 namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 {
@@ -9,10 +11,12 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public StudentController(ApplicationDbContext context)
+        public StudentController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index(string searchString, string MajorId)
@@ -58,15 +62,45 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Models.Student model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorId", "Name", model.MajorId);
-                return View(model);
-            }
+                // 1. Lưu student tạm để có Id
+                _context.Add(model);
+                await _context.SaveChangesAsync();
 
-            _context.Students.Add(model);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                // 2. Tạo user tự động dựa vào email
+                var email = model.Email;
+                var name = $"{model.Name}_{Guid.NewGuid().ToString().Substring(0, 5)}";
+                var password = email.Split('@')[0];
+
+                var user = new ApplicationUser
+                {
+                    UserName = name,
+                    Email = email
+                };
+
+                var result = await _userManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    // 3. Gán UserId cho sinh viên
+                    model.UserId = user.Id;
+                    _context.Update(model);
+                    await _context.SaveChangesAsync();
+
+                    // 4. Thêm role SinhVien
+                    await _userManager.AddToRoleAsync(user, "Sinh Viên");
+
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    // Nếu lỗi, có thể log ra
+                    ModelState.AddModelError("", string.Join(";", result.Errors.Select(e => e.Description)));
+                }
+            }
+            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorId", "Name", model.MajorId);
+            return View(model);
         }
 
         [HttpGet]
@@ -111,21 +145,34 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             return View(student);
         }
 
-        [HttpGet]
+        private bool StudentExists(int id)
+        {
+            return _context.Students.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             var student = await _context.Students.FindAsync(id);
             if (student == null)
+            {
                 return NotFound();
+            }
+
+            if (!string.IsNullOrEmpty(student.UserId))
+            {
+                var user = await _userManager.FindByIdAsync(student.UserId);
+                if (user != null)
+                {
+                    await _userManager.DeleteAsync(user);
+                }
+            }
 
             _context.Students.Remove(student);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.Id == id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

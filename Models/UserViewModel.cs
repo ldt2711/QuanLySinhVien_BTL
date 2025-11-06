@@ -20,5 +20,16 @@ namespace QuanLySinhVien_BTL.Models
 
         [Display(Name = "Role")]
         public string Role { get; set; }
+        public string DisplayName
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(UserName))
+                    return string.Empty;
+
+                var parts = UserName.Split('_');
+                return parts.Length > 0 ? parts[0] : UserName;
+            }
+        }
     }
 }

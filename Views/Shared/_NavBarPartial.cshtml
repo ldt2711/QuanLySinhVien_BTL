@@ -3,24 +3,31 @@
 @inject UserManager<QuanLySinhVien_BTL.Models.ApplicationUser> UserManager
 
 @{
+    string displayName = "";
+    string userEmail = "";
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        var currentUser = await UserManager.GetUserAsync(User);
+        userEmail = currentUser?.Email ?? "";
+        var userName = currentUser?.UserName ?? User?.Identity?.Name ?? "";
+
+        displayName = userName.Contains("_") ? userName.Split("_")[0] : userName;
+    }
 }
 
 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
     @if (SignInManager.IsSignedIn(User))
     {
-        var currentUser = await UserManager.GetUserAsync(User);
-        var userEmail = currentUser?.Email ?? "";
-        var userName = currentUser?.UserName ?? User?.Identity?.Name ?? "";
-
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user-circle me-2" aria-hidden="true"></i>
-                <span class="d-none d-md-inline">@userName</span>
+                <span class="d-none d-md-inline">@displayName</span>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
                 <li><span class="dropdown-item-text text-truncate px-3">@userEmail</span></li>
-                <li><span class="dropdown-item-text px-3 fw-semibold">@userName</span></li>
+                <li><span class="dropdown-item-text px-3 fw-semibold">@displayName</span></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="m-0">

@@ -79,7 +79,8 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
             return View(model);
         }
 
-        [HttpGet]   
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
             var department = await _context.Departments.FindAsync(id);
