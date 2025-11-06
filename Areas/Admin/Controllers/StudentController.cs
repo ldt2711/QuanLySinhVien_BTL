@@ -70,12 +70,11 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 
                 // 2. Tạo user tự động dựa vào email
                 var email = model.Email;
-                var name = $"{model.Name}_{Guid.NewGuid().ToString().Substring(0, 5)}";
                 var password = email.Split('@')[0];
 
                 var user = new ApplicationUser
                 {
-                    UserName = name,
+                    UserName = email,
                     Email = email
                 };
 
@@ -90,17 +89,21 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
 
                     // 4. Thêm role SinhVien
                     await _userManager.AddToRoleAsync(user, "Sinh Viên");
-
-                    return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     // Nếu lỗi, có thể log ra
                     ModelState.AddModelError("", string.Join(";", result.Errors.Select(e => e.Description)));
+                    return View(model);
                 }
+
+                return RedirectToAction(nameof(Index));
             }
-            ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorId", "Name", model.MajorId);
-            return View(model);
+            else
+            {
+                ViewBag.Majors = new SelectList(_context.Majors.ToList(), "MajorId", "Name", model.MajorId);
+                return View(model);
+            }
         }
 
         [HttpGet]

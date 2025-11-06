@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<QuanLySinhVien_BTL.Models.ApplicationUser> SignInManager
 @inject UserManager<QuanLySinhVien_BTL.Models.ApplicationUser> UserManager
+@inject QuanLySinhVien_BTL.Data.ApplicationDbContext _context
 
 @{
     string displayName = "";
@@ -10,9 +11,28 @@
     {
         var currentUser = await UserManager.GetUserAsync(User);
         userEmail = currentUser?.Email ?? "";
-        var userName = currentUser?.UserName ?? User?.Identity?.Name ?? "";
 
-        displayName = userName.Contains("_") ? userName.Split("_")[0] : userName;
+        if (currentUser != null)
+        {
+            // Kiểm tra role
+            var roles = await UserManager.GetRolesAsync(currentUser);
+
+            if (roles.Contains("Sinh Viên"))
+            {
+                var student = _context.Students.FirstOrDefault(s => s.UserId == currentUser.Id);
+                displayName = student?.Name ?? "Sinh viên";
+            }
+            else if (roles.Contains("Giảng Viên"))
+            {
+                var lecturer = _context.Lecturers.FirstOrDefault(l => l.UserId == currentUser.Id);
+                displayName = lecturer?.Name ?? "Giảng viên";
+            }
+            else
+            {
+                // Nếu là admin hoặc không xác định
+                displayName = currentUser.UserName;
+            }
+        }
     }
 }
 

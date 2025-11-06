@@ -69,12 +69,11 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
 
                 var email = model.Email;
-                var name = $"{model.Name}_{Guid.NewGuid().ToString().Substring(0, 5)}";
                 var password = email.Split('@')[0];
 
                 var user = new ApplicationUser
                 {
-                    UserName = name,
+                    UserName = email,
                     Email = email
                 };
 
@@ -86,17 +85,21 @@ namespace QuanLySinhVien_BTL.Areas.Admin.Controllers
                     _context.Update(model);
                     await _context.SaveChangesAsync();
 
-                    await _userManager.AddToRoleAsync(user, "Giảng viên");
-
-                    return RedirectToAction(nameof(Index));
+                    await _userManager.AddToRoleAsync(user, "Giảng Viên");
                 }
                 else
                 {
                     ModelState.AddModelError("", string.Join(";", result.Errors.Select(e => e.Description)));
+                    return View(model);
                 }
+
+                return RedirectToAction(nameof(Index));
             }
-            ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name", model.DepartmentId);
-            return View(model);
+            else
+            {
+                ViewBag.Departments = new SelectList(_context.Departments.ToList(), "DepartmentId", "Name", model.DepartmentId);
+                return View(model);
+            }
         }
 
         [HttpGet]

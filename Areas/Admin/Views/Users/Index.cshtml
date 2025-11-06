@@ -32,7 +32,6 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th>Tên đăng nhập</th>
             <th>Email</th>
             <th>Vai trò</th>
             <th>Tác vụ</th>
@@ -42,7 +41,6 @@
         @foreach (var user in Model)
         {
             <tr>
-                <td>@user.UserName</td>
                 <td>@user.Email</td>
                 <td>@user.Role</td>
                 <td>
