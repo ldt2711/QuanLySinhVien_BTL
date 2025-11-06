@@ -12,7 +12,7 @@ using QuanLySinhVien_BTL.Data;
 namespace QuanLySinhVien_BTL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251106095210_InitialCreate")]
+    [Migration("20251106163654_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

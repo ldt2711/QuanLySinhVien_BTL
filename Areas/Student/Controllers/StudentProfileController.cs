@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien_BTL.Data;
 using System.Security.Claims;
-using QuanLySinhVien_BTL.Models;
+using QuanLySinhVien_BTL.ViewModels;
 
 namespace QuanLySinhVien_BTL.Areas.Student.Controllers
 {
     [Area("Student")]
-    [Authorize(Roles = "Sinh Viên")]
     public class StudentProfileController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -45,19 +44,28 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
             {
                 return Unauthorized();
             }
-            var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == CurrentUserId);
+            var student = await _context.Students.Include(s => s.Major).FirstOrDefaultAsync(s => s.UserId == CurrentUserId);
 
             if (student == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            var viewModel = new StudentEditViewModel
+            {
+                Id = student.Id,
+                Name = student.Name,
+                Email = student.Email,
+                MajorName = student.Major?.Name, // Lấy tên ngành
+                Phone = student.Phone,
+                Address = student.Address
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("Id, Phone, Address")] Models.Student student)
+        public async Task<IActionResult> Edit(StudentEditViewModel viewModel)
         {
             var CurrentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -73,26 +81,22 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
                 return NotFound();
             }
 
-            if (student.Id != StudentToUpdate.Id)
+            if (viewModel.Id != StudentToUpdate.Id)
             {
                 return Forbid();
             }
 
-            StudentToUpdate.Phone = student.Phone;
-            StudentToUpdate.Address = student.Address;
-
             if (!ModelState.IsValid)
             {
-                var StudentWithMajor = await _context.Students.Include(s => s.Major).FirstOrDefaultAsync(s => s.UserId == CurrentUserId);
-
-                if (StudentWithMajor != null)
-                {
-                    StudentWithMajor.Phone = student.Phone;
-                    StudentWithMajor.Address = student.Address;
-                }
-
-                return View(StudentWithMajor);
+                viewModel.Name = StudentToUpdate.Name;
+                viewModel.Email = StudentToUpdate.Email;
+                viewModel.MajorName = (await _context.Majors.FindAsync(StudentToUpdate.MajorId))?.Name;
+                return View(viewModel);
             }
+
+            StudentToUpdate.Phone = viewModel.Phone;
+            StudentToUpdate.Address = viewModel.Address;
+
             try 
             {
                 _context.Update(StudentToUpdate);
@@ -110,6 +114,14 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
                 {
                     throw;
                 }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Đã xảy ra lỗi không mong muốn: {ex.Message}");
+                viewModel.Name = StudentToUpdate.Name;
+                viewModel.Email = StudentToUpdate.Email;
+                viewModel.MajorName = (await _context.Majors.FindAsync(StudentToUpdate.MajorId))?.Name;
+                return View(viewModel);
             }
         }
         private bool StudentExists(int id)

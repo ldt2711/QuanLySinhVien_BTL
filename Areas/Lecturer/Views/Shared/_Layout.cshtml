@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-dark border-end sidebar-wrapper" id="sidebar-wrapper">
+        <div class="sidebar-heading bg-dark text-white p-3 border-bottom">Quản Lý giảng viên</div>
+        <div class="list-group list-group-flush">
+            <a asp-area="Student" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-home me-2"></i> Trang chủ</a>
+            <a asp-area="Student" asp-controller="StudentProfile" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-graduate me-2"></i>Thông tin giảng viên</a>
+            <a asp-area="Student" asp-controller="StudentCourse" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-book me-2"></i> Lớp học phần</a>
+            <a asp-area="Student" asp-controller="StudentScore" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-chart-line me-2"></i> Điểm học phần</a>
+            <div class="sidebar-divider my-2 border-top border-secondary"></div>
+            <a href="#" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-question-circle me-2"></i> Điều khoản</a>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-primary" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    @await Html.PartialAsync("~/Views/Shared/_NavBarPartial.cshtml")
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section AreaScripts {
+    <script>
+        (function () {
+            var wrapper = document.getElementById('wrapper');
+            var toggleButton = document.getElementById('sidebarToggle');
+
+            if (!toggleButton || !wrapper) return;
+
+            toggleButton.addEventListener('click', function () {
+                wrapper.classList.toggle('toggled');
+            });
+        })();
+    </script>
+}
+
+@RenderSection("Scripts", required: false)
