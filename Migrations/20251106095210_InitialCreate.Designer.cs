@@ -12,7 +12,7 @@ using QuanLySinhVien_BTL.Data;
 namespace QuanLySinhVien_BTL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251102074323_InitialCreate")]
+    [Migration("20251106095210_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -315,6 +315,7 @@ namespace QuanLySinhVien_BTL.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -326,6 +327,7 @@ namespace QuanLySinhVien_BTL.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -405,6 +407,7 @@ namespace QuanLySinhVien_BTL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
@@ -447,10 +450,10 @@ namespace QuanLySinhVien_BTL.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<double?>("FinalGrade")
+                    b.Property<double>("FinalGrade")
                         .HasColumnType("float");
 
-                    b.Property<double?>("ProcessGrade")
+                    b.Property<double>("ProcessGrade")
                         .HasColumnType("float");
 
                     b.Property<int>("StudentId")

@@ -25,5 +25,7 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
             }
             return View(student);
         }
+
+        
     }
 }
