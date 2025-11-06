@@ -24,10 +24,10 @@ namespace QuanLySinhVien_BTL.Models
         public string Semester { get; set; }
         [StringLength(20)]
         [Required(ErrorMessage = "Năm học là bắt buộc.")]
-        [RegularExpression(@"^(20\\d{2})$", ErrorMessage = "Năm học phải có định dạng 'YYYY'.")]
+        [RegularExpression(@"^(20\d{2})$", ErrorMessage = "Năm học phải có định dạng 'YYYY'.")]
         public string Year { get; set; }
         [Required(ErrorMessage = "Hệ số phải nhập")]
-        [RegularExpression(@"^(0(\\.\\d{1})?)$", ErrorMessage = "Hệ số phải từ nhỏ hơn 1 và có tối đa một chữ số thập phân.")]
+        [RegularExpression(@"^(0(\.\d{1})?)$", ErrorMessage = "Hệ số phải từ nhỏ hơn 1 và có tối đa một chữ số thập phân.")]
         public float Coefficient { get; set; }
         public ICollection<Transcript>? Transcripts { get; set; }
 
