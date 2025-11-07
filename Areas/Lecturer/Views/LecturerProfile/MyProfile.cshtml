@@ -50,7 +50,7 @@
                         <div class="row mb-3">
                             
                             <div class="col-sm-6 mb-2">
-                                <strong class="d-block text-muted">Ngành học:</strong>
+                                <strong class="d-block text-muted">Ngành dạy:</strong>
                                 <p class="lead mb-0">@Model.Department?.Name</p>
                             </div>
                         </div>
@@ -58,6 +58,9 @@
                         <div class="text-center mt-4">
                             <a asp-action="Edit" class="btn btn-primary btn-lg custom-edit-btn">
                                 <i class="fas fa-edit me-2"></i> Chỉnh sửa thông tin
+                            </a>
+                            <a asp-action="ChangePassword" class="btn btn-primary btn-lg custom-edit-btn">
+                                <i class="fas fa-key me-1"></i> Đổi mật khẩu
                             </a>
                         </div>
                     }

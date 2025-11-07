@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Trang chủ Giảng viên";
-    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Lecturer/Views/Shared/_Layout.cshtml";
 }
 
 <h1 class="mb-4 text-center fw-bold text-primary">
@@ -16,12 +16,8 @@
             <i class="fas fa-user-graduate me-2"></i> Thông tin giảng viên
         </a>
 
-        <a asp-area="Lecturer" asp-controller="LecturerCourse" asp-action="MyCourse" class="btn btn-primary btn-lg p-3 shadow-lg">
-            <i class="fas fa-book me-2"></i> Đăng ký lớp học phần
-        </a>
-
-        <a asp-area="Lecturer" asp-controller="LecturerScore" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
-            <i class="fas fa-chart-line me-2"></i> Điểm học phần
+        <a asp-area="Lecturer" asp-controller="LecturerCourse" asp-action="Index" class="btn btn-primary btn-lg p-3 shadow-lg">
+            <i class="fas fa-book me-2"></i> Lớp học phần
         </a>
 
     </div>

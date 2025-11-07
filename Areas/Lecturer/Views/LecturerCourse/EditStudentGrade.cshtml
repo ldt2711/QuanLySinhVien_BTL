@@ -1,0 +1,44 @@
+﻿@model QuanLySinhVien_BTL.ViewModels.StudentTranscriptViewModel
+
+@{
+    ViewData["Title"] = "Sửa điểm sinh viên";
+    Layout = "~/Areas/Lecturer/Views/Shared/_Layout.cshtml";
+    var course = ViewBag.Course;
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Sửa điểm - @Model.StudentName</h4>
+            <small>Lớp học phần: @course.CourseName</small>
+        </div>
+        <div class="card-body">
+            <form asp-action="EditStudentGrade" method="post">
+                <input type="hidden" name="studentId" value="@Model.StudentId" />
+                <input type="hidden" name="courseId" value="@course.CourseId" />
+
+                <div class="mb-3">
+                    <label class="form-label">Điểm quá trình</label>
+                    <input asp-for="ProcessGrade" class="form-control" type="number" step="0.1" min="0" max="10" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Điểm cuối kỳ</label>
+                    <input asp-for="FinalGrade" class="form-control" type="number" step="0.1" min="0" max="10" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">GPA</label>
+                    <input value="@Model.GPA.ToString("0.0")" class="form-control" readonly />
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Lưu thay đổi
+                </button>
+                <a asp-action="Details" asp-route-id="@course.CourseId" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
