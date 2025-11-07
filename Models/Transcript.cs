@@ -8,7 +8,7 @@ namespace QuanLySinhVien_BTL.Models
         [Key]
         public int TranscriptId { get; set; }
         [ForeignKey("Student")]
-        [Required]
+        [Required]  
         public int StudentId { get; set; }
         public Student? Student { get; set; }
         [ForeignKey("Course")]
