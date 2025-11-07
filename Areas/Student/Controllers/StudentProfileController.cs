@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien_BTL.Data;
-using System.Security.Claims;
+using QuanLySinhVien_BTL.Models;
 using QuanLySinhVien_BTL.ViewModels;
+using System.Security.Claims;
 
 namespace QuanLySinhVien_BTL.Areas.Student.Controllers
 {
@@ -12,9 +14,11 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
     public class StudentProfileController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public StudentProfileController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public StudentProfileController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> MyProfile()
@@ -123,6 +127,37 @@ namespace QuanLySinhVien_BTL.Areas.Student.Controllers
                 viewModel.MajorName = (await _context.Majors.FindAsync(StudentToUpdate.MajorId))?.Name;
                 return View(viewModel);
             }
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
+                return RedirectToAction("MyProfile");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
         }
         private bool StudentExists(int id)
         {

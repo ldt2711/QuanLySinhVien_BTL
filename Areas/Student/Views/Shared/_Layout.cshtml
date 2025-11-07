@@ -2,13 +2,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div id="modal-container"></div>
+
+<script>
+    // Khi modal được mở, di chuyển nó ra ngoài wrapper
+    document.addEventListener('shown.bs.modal', function (event) {
+        const modal = event.target;
+        document.getElementById('modal-container').appendChild(modal);
+    });
+</script>
+
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
     <div class="bg-dark border-end sidebar-wrapper" id="sidebar-wrapper">
         <div class="sidebar-heading bg-dark text-white p-3 border-bottom">Quản Lý Sinh Viên</div>
         <div class="list-group list-group-flush">
             <a asp-area="Student" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-home me-2"></i> Trang chủ</a>
-            <a asp-area="Student" asp-controller="StudentProfile" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-graduate me-2"></i>Thông tin sinh viên</a>
+            <a asp-area="Student" asp-controller="StudentProfile" asp-action="MyProfile" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-user-graduate me-2"></i>Thông tin sinh viên</a>
             <a asp-area="Student" asp-controller="StudentCourse" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-book me-2"></i> Đăng ký lớp học phần</a>
             <a asp-area="Student" asp-controller="StudentScore" asp-action="Index" class="list-group-item list-group-item-action bg-dark text-white"><i class="fas fa-chart-line me-2"></i> Điểm học phần</a>
             <div class="sidebar-divider my-2 border-top border-secondary"></div>

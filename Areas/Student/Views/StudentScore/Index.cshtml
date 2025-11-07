@@ -1,0 +1,80 @@
+﻿@model IEnumerable<QuanLySinhVien_BTL.Models.Transcript>
+
+@{
+    ViewData["Title"] = "Kết quả học tập";
+    Layout = "~/Areas/Student/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Kết quả học tập</h2>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>Mã học phần</th>
+                <th>Tên môn học</th>
+                <th>Giảng viên</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@item.CourseId</td>
+                    <td>@item.Course.CourseName</td>
+                    <td>@item.Course.Lecturer.Name</td>
+                    <td>
+                        <button class="btn btn-sm btn-info text-white btn-detail"
+                                data-id="@item.TranscriptId">
+                            <i class="bi bi-eye"></i> Chi tiết
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal hiển thị chi tiết điểm -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Chi tiết điểm học phần</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Môn học:</strong> <span id="courseName"></span></p>
+                <p><strong>Điểm quá trình:</strong> <span id="processGrade"></span></p>
+                <p><strong>Điểm cuối kỳ:</strong> <span id="finalGrade"></span></p>
+                <p><strong>GPA:</strong> <span id="gpa"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            $(".btn-detail").on("click", function () {
+                var id = $(this).data("id");
+                $.get("/Student/StudentScore/Details/" + id, function (data) {
+                    $("#courseName").text(data.courseName);
+                    $("#processGrade").text(data.processGrade ?? "Chưa có");
+                    $("#finalGrade").text(data.finalGrade ?? "Chưa có");
+                    $("#gpa").text(data.gpa?.toFixed(1) ?? "Chưa có");
+
+                    const modalElement = document.getElementById('detailModal');
+                    const modal = new bootstrap.Modal(modalElement);
+                    modal.show();
+                });
+            });
+        });
+    </script>
+}
+
