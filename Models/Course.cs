@@ -30,6 +30,5 @@ namespace QuanLySinhVien_BTL.Models
         [RegularExpression(@"^(0(\.\d{1})?)$", ErrorMessage = "Hệ số phải từ nhỏ hơn 1 và có tối đa một chữ số thập phân.")]
         public float Coefficient { get; set; }
         public ICollection<Transcript>? Transcripts { get; set; }
-
     }
 }
