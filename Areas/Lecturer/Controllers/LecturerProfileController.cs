@@ -15,9 +15,11 @@ namespace QuanLySinhVien_BTL.Areas.Lecturer.Controllers
     public class LecturerProfileController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public LecturerProfileController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public LecturerProfileController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> MyProfile()
@@ -125,6 +127,38 @@ namespace QuanLySinhVien_BTL.Areas.Lecturer.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return NotFound();
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
+                return RedirectToAction("MyProfile");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(model);
+        }
+
         private bool LecturerExists(int id)
         {
             return _context.Lecturers.Any(e => e.Id == id);

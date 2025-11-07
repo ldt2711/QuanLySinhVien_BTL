@@ -1,0 +1,40 @@
+﻿@model IEnumerable<QuanLySinhVien_BTL.ViewModels.StudentTranscriptViewModel>
+
+@{
+    ViewData["Title"] = "Chi tiết lớp học phần";
+    Layout = "~/Areas/Lecturer/Views/Shared/_Layout.cshtml";
+    var course = ViewBag.Course;
+}
+
+<div class="container mt-4">
+    <h3 class="mb-4">Danh sách sinh viên - @course.CourseName</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>Mã sinh viên</th>
+                <th>Họ và tên</th>
+                <th>Điểm quá trình</th>
+                <th>Điểm cuối kỳ</th>
+                <th>GPA</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.StudentId</td>
+                    <td>@s.StudentName</td>
+                    <td>@s.ProcessGrade</td>
+                    <td>@s.FinalGrade</td>
+                    <td>@s.GPA.ToString("0.0")</td>
+                    <td>
+                        <a asp-action="EditStudentGrade" asp-route-studentId="@s.StudentId" asp-route-courseId="@course.CourseId"
+                           class="btn btn-sm btn-warning">Sửa điểm</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
