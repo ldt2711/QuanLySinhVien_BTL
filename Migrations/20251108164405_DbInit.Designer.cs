@@ -12,8 +12,8 @@ using QuanLySinhVien_BTL.Data;
 namespace QuanLySinhVien_BTL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251106163654_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251108164405_DbInit")]
+    partial class DbInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
